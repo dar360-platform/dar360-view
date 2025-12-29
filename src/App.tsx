@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import AgentAuth from "./pages/auth/AgentAuth";
+import OwnerAuth from "./pages/auth/OwnerAuth";
+import TenantAuth from "./pages/auth/TenantAuth";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +19,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/agent/auth" element={<AgentAuth />} />
+          <Route path="/owner/auth" element={<OwnerAuth />} />
+          <Route path="/tenant/auth" element={<TenantAuth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
