@@ -56,20 +56,20 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold text-primary-foreground leading-tight mb-6"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-primary-foreground leading-tight mb-6"
           >
-            Prove Your Worth.{" "}
-            <span className="text-gradient-gold">Close More Deals.</span>
+            Every Family Deserves{" "}
+            <span className="text-gradient-gold">a Dar</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-primary-foreground/80 font-body leading-relaxed mb-8 max-w-3xl"
+            className="text-lg sm:text-xl md:text-2xl text-primary-foreground/80 font-body leading-relaxed mb-8 max-w-3xl"
           >
-            The only UAE rental platform where owners see every viewing, every share, every effort. 
-            Sign contracts via UAE Pass. Submit Ejari in one click.
+            A place to call home, found without stress, managed without chaos. 
+            The unified platform connecting agents, owners, and tenants across the UAE.
           </motion.p>
 
           <motion.div

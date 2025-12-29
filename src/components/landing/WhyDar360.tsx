@@ -36,13 +36,13 @@ const stats = [
 ];
 
 const competitorComparison = [
-  { feature: "Owner visibility", dar360: true, habi: false, propspace: false, excel: false },
-  { feature: "Agent-inclusive", dar360: true, habi: false, propspace: true, excel: true },
-  { feature: "UAE Pass signing", dar360: true, habi: true, propspace: false, excel: false },
-  { feature: "Ejari submission", dar360: true, habi: true, propspace: false, excel: false },
-  { feature: "WhatsApp tracking", dar360: true, habi: false, propspace: false, excel: false },
-  { feature: "RERA verification", dar360: true, habi: false, propspace: false, excel: false },
-  { feature: "Cheque reminders", dar360: true, habi: true, propspace: false, excel: false },
+  { feature: "Owner visibility", dar360: true, propspace: false, excel: false },
+  { feature: "Agent-inclusive", dar360: true, propspace: true, excel: true },
+  { feature: "UAE Pass signing", dar360: true, propspace: false, excel: false },
+  { feature: "Ejari submission", dar360: true, propspace: false, excel: false },
+  { feature: "WhatsApp tracking", dar360: true, propspace: false, excel: false },
+  { feature: "RERA verification", dar360: true, propspace: false, excel: false },
+  { feature: "Cheque reminders", dar360: true, propspace: false, excel: false },
 ];
 
 export const WhyDar360 = () => {
@@ -150,41 +150,34 @@ export const WhyDar360 = () => {
           <h3 className="font-display text-2xl font-semibold text-foreground text-center mb-8">
             How Dar360 Compares
           </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full bg-card rounded-2xl border border-border/50 overflow-hidden">
+          <div className="overflow-x-auto -mx-4 px-4">
+            <table className="w-full bg-card rounded-2xl border border-border/50 overflow-hidden min-w-[400px]">
               <thead>
                 <tr className="border-b border-border/50">
-                  <th className="p-4 text-left font-display font-semibold text-foreground">Feature</th>
-                  <th className="p-4 text-center font-display font-semibold text-accent">Dar360</th>
-                  <th className="p-4 text-center font-display font-semibold text-muted-foreground">Habi</th>
-                  <th className="p-4 text-center font-display font-semibold text-muted-foreground">PropSpace</th>
-                  <th className="p-4 text-center font-display font-semibold text-muted-foreground">Excel+WhatsApp</th>
+                  <th className="p-3 md:p-4 text-left font-display font-semibold text-foreground text-sm md:text-base">Feature</th>
+                  <th className="p-3 md:p-4 text-center font-display font-semibold text-accent text-sm md:text-base">Dar360</th>
+                  <th className="p-3 md:p-4 text-center font-display font-semibold text-muted-foreground text-sm md:text-base">PropSpace</th>
+                  <th className="p-3 md:p-4 text-center font-display font-semibold text-muted-foreground text-sm md:text-base">Excel+WhatsApp</th>
                 </tr>
               </thead>
               <tbody>
                 {competitorComparison.map((row, index) => (
                   <tr key={row.feature} className={index !== competitorComparison.length - 1 ? "border-b border-border/30" : ""}>
-                    <td className="p-4 text-muted-foreground font-body">{row.feature}</td>
-                    <td className="p-4 text-center">
-                      {row.dar360 ? <Check className="w-5 h-5 text-green-500 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />}
+                    <td className="p-3 md:p-4 text-muted-foreground font-body text-sm md:text-base">{row.feature}</td>
+                    <td className="p-3 md:p-4 text-center">
+                      {row.dar360 ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 mx-auto" /> : <X className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
                     </td>
-                    <td className="p-4 text-center">
-                      {row.habi ? <Check className="w-5 h-5 text-green-500 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />}
+                    <td className="p-3 md:p-4 text-center">
+                      {row.propspace ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 mx-auto" /> : <X className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
                     </td>
-                    <td className="p-4 text-center">
-                      {row.propspace ? <Check className="w-5 h-5 text-green-500 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />}
-                    </td>
-                    <td className="p-4 text-center">
-                      {row.excel ? <Check className="w-5 h-5 text-green-500 mx-auto" /> : <X className="w-5 h-5 text-destructive mx-auto" />}
+                    <td className="p-3 md:p-4 text-center">
+                      {row.excel ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 mx-auto" /> : <X className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="text-center text-muted-foreground font-body italic mt-6 text-sm">
-            "Habi helps landlords bypass agents. Dar360 helps agents prove their worth."
-          </p>
         </motion.div>
       </div>
     </section>
