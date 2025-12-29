@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Target, Heart, Lightbulb } from "lucide-react";
+import { Target, Heart, Lightbulb, Shield } from "lucide-react";
 
 export const WhoWeAre = () => {
   return (
@@ -26,23 +26,26 @@ export const WhoWeAre = () => {
               Who We Are
             </span>
             <h2 className="font-display text-4xl lg:text-5xl font-semibold mb-6">
-              Every Family Deserves a{" "}
-              <span className="text-gradient-gold">Sakani</span>
+              Built for UAE Agents,{" "}
+              <span className="text-gradient-gold">By UAE Experts</span>
             </h2>
             <p className="text-primary-foreground/80 text-lg mb-8 font-body leading-relaxed">
-              A place to call home, found without stress, managed without chaos. We're on a mission 
-              to transform the UAE rental market by creating a unified platform where agents can work 
-              efficiently, owners can see their investments being actively managed, and tenants can 
-              find homes through a transparent, stress-free process.
+              We're not a generic CRM. We're purpose-built for the Dubai rental market — 
+              with Ejari, UAE Pass, and RERA compliance from day one. Our mission is to help 
+              agents prove their value through transparency.
             </p>
             <div className="flex flex-wrap gap-4 text-sm font-body">
               <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
-                <div className="w-2 h-2 rounded-full bg-accent"></div>
+                <span className="text-lg">🇦🇪</span>
                 <span className="text-primary-foreground/80">Dubai, UAE</span>
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
                 <div className="w-2 h-2 rounded-full bg-accent"></div>
                 <span className="text-primary-foreground/80">Founded 2025</span>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10">
+                <Shield className="w-4 h-4 text-accent" />
+                <span className="text-primary-foreground/80">REES Program Member</span>
               </div>
             </div>
           </motion.div>
@@ -58,17 +61,17 @@ export const WhoWeAre = () => {
               {
                 icon: Target,
                 title: "Our Mission",
-                description: "To digitize the entire rental lifecycle, giving every stakeholder visibility, efficiency, and peace of mind.",
+                description: "To help agents prove their value through transparency. When owners see your efforts, they trust your commission.",
               },
               {
                 icon: Heart,
                 title: "Our Values",
-                description: "Transparency first. We believe trust is built through data, not promises. Every action is visible, every effort is tracked.",
+                description: "Agent-first design. We build for agents, not against them. Unlike platforms that bypass agents, Dar360 makes you indispensable.",
               },
               {
                 icon: Lightbulb,
                 title: "Our Approach",
-                description: "Purpose-built for UAE rentals. Not a generic CRM adapted for real estate, but a platform designed from day one for the local market.",
+                description: "UAE-native compliance. Ejari submission, UAE Pass signatures, RERA verification — not afterthoughts, but core features.",
               },
             ].map((item, index) => (
               <motion.div

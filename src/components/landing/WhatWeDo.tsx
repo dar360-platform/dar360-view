@@ -1,36 +1,36 @@
 import { motion } from "framer-motion";
-import { Building2, Users, Eye, FileCheck, MessageSquare, Shield } from "lucide-react";
+import { Shield, Eye, FileCheck, MessageSquare, FileText, Wallet } from "lucide-react";
 
 const features = [
   {
-    icon: Building2,
-    title: "Unified Property Management",
-    description: "One dashboard for all your listings, viewings, and contracts. No more juggling spreadsheets and WhatsApp.",
+    icon: Shield,
+    title: "RERA-Verified Agent Profiles",
+    description: "Display your RERA badge. Build instant credibility with property owners looking for trusted agents.",
   },
   {
     icon: Eye,
-    title: "Owner Transparency",
-    description: "Property owners see agent activity in real-time. Every viewing, every inquiry, every effort is visible.",
+    title: "Real-Time Owner Visibility",
+    description: "Owners see every viewing, every WhatsApp click, every effort — no more weekly update calls.",
   },
   {
     icon: FileCheck,
-    title: "Digital Contracts",
-    description: "Generate RERA-compliant contracts in minutes. Tenants sign via OTP — no office visits required.",
+    title: "UAE Pass Digital Signing",
+    description: "Generate RERA contracts in minutes. Tenants sign via UAE Pass or OTP — legally valid, no office visits.",
   },
   {
     icon: MessageSquare,
-    title: "WhatsApp Integration",
-    description: "Share properties via WhatsApp with trackable links. See who clicked, when, and how often.",
+    title: "WhatsApp Sharing + Analytics",
+    description: "Share listings with trackable links. See who clicked, when, and how often. Prove your marketing efforts.",
   },
   {
-    icon: Users,
-    title: "Tenant Self-Service",
-    description: "Tenants browse listings, sign contracts digitally, and submit maintenance requests with ease.",
+    icon: FileText,
+    title: "One-Click Ejari Submission",
+    description: "Submit signed contracts for Ejari registration directly. Certificate delivered in 24 hours.",
   },
   {
-    icon: Shield,
-    title: "Built-In Compliance",
-    description: "Automated reminders for Ejari and Tawtheeq registration. Never miss a compliance deadline.",
+    icon: Wallet,
+    title: "Cheque Schedule & Reminders",
+    description: "Track cheque deposits, send automatic reminders. Owners see payment status in real-time.",
   },
 ];
 
@@ -49,11 +49,10 @@ export const WhatWeDo = () => {
             What We Do
           </span>
           <h2 className="font-display text-4xl lg:text-5xl font-semibold text-foreground mb-6">
-            Transforming UAE Real Estate
+            Everything Agents Need to Prove Their Value
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-body">
-            Sakani connects agents, property owners, and tenants in one transparent ecosystem — 
-            replacing fragmented tools with a single source of truth.
+            One platform to list, share, sign, and submit — with full transparency for owners.
           </p>
         </motion.div>
 

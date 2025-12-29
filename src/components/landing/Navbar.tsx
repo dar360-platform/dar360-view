@@ -7,6 +7,7 @@ const navItems = [
   { label: "What We Do", href: "#what-we-do" },
   { label: "Who We Are", href: "#who-we-are" },
   { label: "The App", href: "#app" },
+  { label: "Pricing", href: "#pricing" },
 ];
 
 export const Navbar = () => {
@@ -46,10 +47,10 @@ export const Navbar = () => {
             {/* Logo */}
             <a href="#" className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center">
-                <span className="font-display text-xl font-bold text-accent-foreground">S</span>
+                <span className="font-display text-xl font-bold text-accent-foreground">D</span>
               </div>
               <span className={`font-display text-2xl font-semibold ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}>
-                Sakani
+                Dar360
               </span>
             </a>
 
