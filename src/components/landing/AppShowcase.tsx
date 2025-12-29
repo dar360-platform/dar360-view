@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 import appMockup from "@/assets/app-mockup.png";
 
 const agentFeatures = [
   "Property inventory management",
   "Viewing scheduler & tracking",
-  "Digital contract generation",
-  "OTP-based e-signatures",
+  "RERA-compliant contract generation",
+  "UAE Pass + OTP signing",
   "WhatsApp sharing with analytics",
+  "One-click Ejari submission",
+  "RERA-verified agent badge",
   "Commission tracking",
 ];
 
@@ -16,14 +17,16 @@ const ownerFeatures = [
   "Real-time property dashboard",
   "Agent activity reports",
   "Viewing history visibility",
-  "Rent collection tracking",
+  "Cheque schedule & reminders",
   "Maintenance request visibility",
+  "Income dashboard",
+  "Ejari certificate storage",
   "Secure document vault",
 ];
 
 const tenantFeatures = [
   "Verified property listings",
-  "Digital contract signing",
+  "UAE Pass / OTP contract signing",
   "Online rent payments",
   "Maintenance requests",
   "Photo documentation",
@@ -49,7 +52,7 @@ export const AppShowcase = () => {
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-body">
             Whether you're an agent closing deals, an owner tracking investments, or a tenant finding 
-            your next home — Sakani is built for you.
+            your next home — Dar360 is built for you.
           </p>
         </motion.div>
 
@@ -65,7 +68,7 @@ export const AppShowcase = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/5 rounded-3xl blur-3xl"></div>
               <motion.img
                 src={appMockup}
-                alt="Sakani App Interface"
+                alt="Dar360 App Interface"
                 className="relative w-full h-auto drop-shadow-2xl"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -135,63 +138,6 @@ export const AppShowcase = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Comparison Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <h3 className="font-display text-2xl font-semibold text-foreground text-center mb-8">
-            Why Sakani?
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                label: "Today's Reality",
-                items: ["WhatsApp chaos", "Excel spreadsheets", "Paper contracts", "No visibility"],
-                highlight: false,
-              },
-              {
-                label: "With Sakani",
-                items: ["One dashboard", "Digital contracts", "Real-time tracking", "Full transparency"],
-                highlight: true,
-              },
-              {
-                label: "The Result",
-                items: ["Close faster", "Build trust", "Reduce admin", "Scale easily"],
-                highlight: false,
-              },
-            ].map((column) => (
-              <div
-                key={column.label}
-                className={`p-6 rounded-2xl ${
-                  column.highlight
-                    ? "bg-accent text-accent-foreground shadow-gold"
-                    : "bg-card border border-border/50"
-                }`}
-              >
-                <h4 className={`font-display text-lg font-semibold mb-4 ${column.highlight ? "" : "text-foreground"}`}>
-                  {column.label}
-                </h4>
-                <ul className="space-y-3">
-                  {column.items.map((item) => (
-                    <li key={item} className={`flex items-center gap-2 text-sm font-body ${column.highlight ? "" : "text-muted-foreground"}`}>
-                      {column.highlight ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <ArrowRight className="w-4 h-4" />
-                      )}
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

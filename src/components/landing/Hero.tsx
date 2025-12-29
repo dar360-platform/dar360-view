@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Shield, FileCheck, Clock, Banknote } from "lucide-react";
 import heroImage from "@/assets/hero-dubai.jpg";
 
 export const Hero = () => {
@@ -47,8 +47,8 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-body mb-6">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-              Now in Dubai • Coming Soon to MENA
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              Live in Dubai • RERA Verified Agents
             </span>
           </motion.div>
 
@@ -58,32 +58,32 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold text-primary-foreground leading-tight mb-6"
           >
-            Every Family Deserves a{" "}
-            <span className="text-gradient-gold">Sakani</span>
+            Prove Your Worth.{" "}
+            <span className="text-gradient-gold">Close More Deals.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-primary-foreground/80 font-body leading-relaxed mb-10 max-w-2xl"
+            className="text-xl md:text-2xl text-primary-foreground/80 font-body leading-relaxed mb-8 max-w-3xl"
           >
-            A place to call home, found without stress, managed without chaos. 
-            The unified platform connecting agents, owners, and tenants across the UAE.
+            The only UAE rental platform where owners see every viewing, every share, every effort. 
+            Sign contracts via UAE Pass. Submit Ejari in one click.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 mb-8"
           >
             <Button
               variant="gold"
               size="xl"
-              onClick={() => scrollToSection("#agent-login")}
+              onClick={() => scrollToSection("#pricing")}
             >
-              Get Started
+              Start 14-Day Free Trial
               <ArrowRight className="w-5 h-5" />
             </Button>
             <Button
@@ -92,8 +92,31 @@ export const Hero = () => {
               onClick={() => scrollToSection("#what-we-do")}
             >
               <Play className="w-5 h-5" />
-              Learn More
+              Watch 2-Min Demo
             </Button>
+          </motion.div>
+
+          {/* Trust Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.55 }}
+            className="flex flex-wrap gap-3 mb-12"
+          >
+            {[
+              "UAE Pass Integrated",
+              "RERA Verified Agents",
+              "Ejari Ready",
+              "UAE PDPL Compliant",
+            ].map((badge) => (
+              <span
+                key={badge}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground/70 text-xs font-body"
+              >
+                <Shield className="w-3 h-3 text-accent" />
+                {badge}
+              </span>
+            ))}
           </motion.div>
 
           {/* Stats */}
@@ -101,20 +124,26 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-16 pt-8 border-t border-primary-foreground/20"
+            className="pt-8 border-t border-primary-foreground/20"
           >
-            <div className="grid grid-cols-3 gap-8 max-w-lg">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl">
               {[
-                { value: "100%", label: "Digital Contracts" },
-                { value: "Real-time", label: "Owner Visibility" },
-                { value: "UAE", label: "Compliance Ready" },
+                { icon: Shield, value: "UAE Pass", label: "Signatures" },
+                { icon: FileCheck, value: "RERA", label: "Verified" },
+                { icon: Clock, value: "24hrs", label: "Ejari Delivery" },
+                { icon: Banknote, value: "AED 25", label: "Per Contract" },
               ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="font-display text-2xl md:text-3xl font-semibold text-accent mb-1">
-                    {stat.value}
+                <div key={stat.label} className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
+                    <stat.icon className="w-5 h-5 text-accent" />
                   </div>
-                  <div className="text-sm text-primary-foreground/60 font-body">
-                    {stat.label}
+                  <div>
+                    <div className="font-display text-lg md:text-xl font-semibold text-primary-foreground">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-primary-foreground/60 font-body">
+                      {stat.label}
+                    </div>
                   </div>
                 </div>
               ))}

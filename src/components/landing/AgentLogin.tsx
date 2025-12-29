@@ -27,7 +27,7 @@ export const AgentLogin = () => {
   };
 
   return (
-    <section id="agent-login" className="py-24 lg:py-32 bg-muted/50 bg-geometric-pattern">
+    <section id="agent-login" className="py-24 lg:py-32 bg-background bg-geometric-pattern">
       <div className="container mx-auto px-4">
         <div className="max-w-md mx-auto">
           <motion.div
@@ -151,13 +151,13 @@ export const AgentLogin = () => {
 
               <div className="mt-6 pt-6 border-t border-border/50 text-center">
                 <p className="text-sm text-muted-foreground font-body">
-                  New to Sakani?{" "}
+                  New to Dar360?{" "}
                   <button
                     type="button"
                     className="text-accent hover:text-accent/80 font-medium transition-colors"
                     onClick={() => toast.info("Registration coming soon!")}
                   >
-                    Request agent access
+                    Start Free Trial
                   </button>
                 </p>
               </div>
