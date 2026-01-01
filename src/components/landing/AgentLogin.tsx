@@ -1,36 +1,36 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Building2, Users, Home, ArrowRight } from "lucide-react";
+import { Briefcase, Building, Key, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const loginOptions = [
   {
     id: "agent",
-    icon: Building2,
+    icon: Briefcase,
     title: "Agent Portal",
     description: "Manage properties, viewings, and contracts",
     color: "bg-accent",
-    textColor: "text-accent-foreground",
+    iconColor: "text-accent-foreground",
     href: "/agent/auth",
     signupHref: "/agent/auth?mode=signup",
   },
   {
     id: "owner",
-    icon: Users,
+    icon: Building,
     title: "Owner Portal",
     description: "Track your properties and agent activity",
     color: "bg-primary",
-    textColor: "text-primary-foreground",
+    iconColor: "text-primary-foreground",
     href: "/owner/auth",
     signupHref: "/owner/auth?mode=signup",
   },
   {
     id: "tenant",
-    icon: Home,
+    icon: Key,
     title: "Tenant Portal",
     description: "View contracts, payments, and maintenance",
-    color: "bg-green-600",
-    textColor: "text-white",
+    color: "bg-muted",
+    iconColor: "text-foreground",
     href: "/tenant/auth",
     signupHref: "/tenant/auth?mode=signup",
   },
@@ -82,7 +82,7 @@ export const AgentLogin = () => {
                   <div
                     className={`flex-shrink-0 inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl ${option.color} md:mb-6 transition-transform duration-300 group-hover:scale-110`}
                   >
-                    <option.icon className={`w-6 h-6 md:w-7 md:h-7 ${option.textColor}`} />
+                    <option.icon className={`w-6 h-6 md:w-7 md:h-7 ${option.iconColor}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-display text-lg md:text-2xl font-semibold text-foreground mb-1 md:mb-2">

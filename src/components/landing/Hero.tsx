@@ -47,7 +47,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-body mb-6">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
               Live in Dubai • RERA Verified Agents
             </span>
           </motion.div>
