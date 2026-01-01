@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Building2, Users, Home, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "What We Do", href: "#what-we-do" },
@@ -74,9 +75,7 @@ export const Navbar = () => {
           <nav className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <a href="/" className="flex items-center gap-2">
-              <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-accent flex items-center justify-center">
-                <span className="font-display text-lg md:text-xl font-bold text-accent-foreground">D</span>
-              </div>
+              <img src={logo} alt="Dar360" className="w-9 h-9 md:w-10 md:h-10 object-contain" />
               <span className={`font-display text-xl md:text-2xl font-semibold ${isScrolled ? "text-foreground" : "text-primary-foreground"}`}>
                 Dar360
               </span>
@@ -135,9 +134,7 @@ export const Navbar = () => {
             {/* Header */}
             <div className="flex items-center justify-between h-16 px-4 border-b border-border/50">
               <a href="/" className="flex items-center gap-2">
-                <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center">
-                  <span className="font-display text-lg font-bold text-accent-foreground">D</span>
-                </div>
+                <img src={logo} alt="Dar360" className="w-9 h-9 object-contain" />
                 <span className="font-display text-xl font-semibold text-foreground">Dar360</span>
               </a>
               <button

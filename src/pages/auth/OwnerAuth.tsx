@@ -4,8 +4,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Users, ArrowLeft, Shield, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Shield, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
+import logo from "@/assets/logo.png";
 
 export const OwnerAuth = () => {
   const [searchParams] = useSearchParams();
@@ -50,9 +51,7 @@ export const OwnerAuth = () => {
         >
           {/* Logo & Title */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary mb-4">
-              <Users className="w-8 h-8 text-primary-foreground" />
-            </div>
+            <img src={logo} alt="Dar360" className="w-16 h-16 mx-auto mb-4 object-contain" />
             <h1 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-2">
               {isSignUp ? "Create Owner Account" : "Owner Portal"}
             </h1>
