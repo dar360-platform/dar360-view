@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, FileText, Car, BarChart3, AlertCircle, Check, X } from "lucide-react";
+import { Phone, FileText, Car, BarChart3, AlertCircle, Check, X, ArrowDown, CheckCircle2, XCircle } from "lucide-react";
 
 const comparisons = [
   {
@@ -131,8 +131,8 @@ export const WhyDar360 = () => {
                   <span className="font-semibold text-accent">{stat.after}</span>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-500/10 text-green-600 text-sm font-medium">
-                <span>⬇️</span>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
+                <ArrowDown className="w-3 h-3" />
                 {stat.improvement}
               </div>
             </div>
@@ -165,13 +165,13 @@ export const WhyDar360 = () => {
                   <tr key={row.feature} className={index !== competitorComparison.length - 1 ? "border-b border-border/30" : ""}>
                     <td className="p-3 md:p-4 text-muted-foreground font-body text-sm md:text-base">{row.feature}</td>
                     <td className="p-3 md:p-4 text-center">
-                      {row.dar360 ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 mx-auto" /> : <X className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
+                      {row.dar360 ? <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-accent mx-auto" /> : <XCircle className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
                     </td>
                     <td className="p-3 md:p-4 text-center">
-                      {row.propspace ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 mx-auto" /> : <X className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
+                      {row.propspace ? <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-accent mx-auto" /> : <XCircle className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/50 mx-auto" />}
                     </td>
                     <td className="p-3 md:p-4 text-center">
-                      {row.excel ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500 mx-auto" /> : <X className="w-4 h-4 md:w-5 md:h-5 text-destructive mx-auto" />}
+                      {row.excel ? <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-accent mx-auto" /> : <XCircle className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/50 mx-auto" />}
                     </td>
                   </tr>
                 ))}

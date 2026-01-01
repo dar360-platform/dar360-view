@@ -69,10 +69,10 @@ export const TenantAuth = () => {
               type="button"
               variant="outline"
               size="lg"
-              className="w-full mb-6 h-14 text-base font-medium border-2 hover:bg-secondary/5"
+              className="w-full mb-6 h-14 text-base font-medium border-2 hover:bg-accent/5"
               onClick={handleUAEPassLogin}
             >
-              <Shield className="w-5 h-5 mr-3 text-green-600" />
+              <Shield className="w-5 h-5 mr-3 text-accent" />
               Continue with UAE Pass
             </Button>
 
@@ -141,9 +141,9 @@ export const TenantAuth = () => {
 
               <Button
                 type="submit"
-                variant="default"
+                variant="gold"
                 size="lg"
-                className="w-full h-14 text-base font-semibold mt-6 bg-green-600 hover:bg-green-700"
+                className="w-full h-14 text-base font-semibold mt-6"
                 disabled={isLoading}
               >
                 {isLoading ? "Please wait..." : isSignUp ? "Create Account" : "Sign In"}
@@ -155,14 +155,14 @@ export const TenantAuth = () => {
               {isSignUp ? (
                 <p className="text-sm text-muted-foreground font-body">
                   Already have an account?{" "}
-                  <Link to="/tenant/auth" className="text-green-600 hover:text-green-700 font-medium transition-colors">
+                  <Link to="/tenant/auth" className="text-accent hover:text-accent/80 font-medium transition-colors">
                     Sign In
                   </Link>
                 </p>
               ) : (
                 <p className="text-sm text-muted-foreground font-body">
                   New to Dar360?{" "}
-                  <Link to="/tenant/auth?mode=signup" className="text-green-600 hover:text-green-700 font-medium transition-colors">
+                  <Link to="/tenant/auth?mode=signup" className="text-accent hover:text-accent/80 font-medium transition-colors">
                     Create Account
                   </Link>
                 </p>
