@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin, MessageCircle, Shield, FileCheck, Building2 } from "lucide-react";
-
+import logo from "@/assets/logo.png";
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -10,9 +10,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center">
-                <span className="font-display text-xl font-bold text-accent-foreground">D</span>
-              </div>
+              <img src={logo} alt="Dar360" className="w-10 h-10 object-contain" />
               <span className="font-display text-2xl font-semibold">Dar360</span>
             </div>
             <p className="text-primary-foreground/70 font-body max-w-sm mb-6">
