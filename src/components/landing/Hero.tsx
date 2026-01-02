@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Shield, FileCheck, Clock, Banknote } from "lucide-react";
-import heroImage from "@/assets/hero-dubai.jpg";
+import { ArrowRight } from "lucide-react";
+import appMockup from "@/assets/app-mockup.png";
 
 export const Hero = () => {
   const scrollToSection = (href: string) => {
@@ -12,141 +12,88 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Dubai Marina Skyline"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-primary/50"></div>
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 right-10 w-96 h-96 rounded-full bg-accent/10 blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-64 h-64 rounded-full bg-accent/10 blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-forest-light opacity-50" />
+      
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 pt-20">
-        <div className="max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground/80 text-sm font-body mb-6">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-              Live in Dubai • RERA Verified Agents
-            </span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-primary-foreground leading-tight mb-6"
-          >
-            Every Family Deserves{" "}
-            <span className="text-gradient-gold">a Dar</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg sm:text-xl md:text-2xl text-primary-foreground/80 font-body leading-relaxed mb-8 max-w-3xl"
-          >
-            A place to call home, found without stress, managed without chaos. 
-            The unified platform connecting agents, owners, and tenants across the UAE.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-wrap gap-4 mb-8"
-          >
-            <Button
-              variant="gold"
-              size="xl"
-              onClick={() => scrollToSection("#pricing")}
+      <div className="container mx-auto px-4 relative z-10 py-24 lg:py-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Side - Text */}
+          <div className="max-w-xl">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-accent font-body text-sm font-medium mb-8 uppercase tracking-wider"
             >
-              Start 14-Day Free Trial
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button
-              variant="hero-outline"
-              size="xl"
-              onClick={() => scrollToSection("#what-we-do")}
-            >
-              <Play className="w-5 h-5" />
-              Watch 2-Min Demo
-            </Button>
-          </motion.div>
+              For UAE Rental Agents
+            </motion.span>
 
-          {/* Trust Badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="flex flex-wrap gap-3 mb-12"
-          >
-            {[
-              "UAE Pass Integrated",
-              "RERA Verified Agents",
-              "Ejari Ready",
-              "UAE PDPL Compliant",
-            ].map((badge) => (
-              <span
-                key={badge}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary-foreground/5 border border-primary-foreground/10 text-primary-foreground/70 text-xs font-body"
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-primary-foreground leading-tight mb-6"
+            >
+              Stop Chasing{" "}
+              <br />
+              Owners for Trust.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-lg sm:text-xl text-cream/80 font-body leading-relaxed mb-10"
+            >
+              Every viewing logged. Every click tracked. 
+              Every effort visible. Finally, proof that speaks for itself.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+            >
+              <Button
+                variant="gold"
+                size="xl"
+                onClick={() => scrollToSection("#pricing")}
+                className="rounded-xl"
               >
-                <Shield className="w-3 h-3 text-accent" />
-                {badge}
-              </span>
-            ))}
-          </motion.div>
+                Start Free Trial
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </motion.div>
 
-          {/* Stats */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="text-cream/50 text-sm font-body mt-6"
+            >
+              14 days free • No credit card • RERA verified
+            </motion.p>
+          </div>
+
+          {/* Right Side - App Mockup */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="pt-8 border-t border-primary-foreground/20"
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative hidden lg:block"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl">
-              {[
-                { icon: Shield, value: "UAE Pass", label: "Signatures" },
-                { icon: FileCheck, value: "RERA", label: "Verified" },
-                { icon: Clock, value: "24hrs", label: "Ejari Delivery" },
-                { icon: Banknote, value: "AED 25", label: "Per Contract" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
-                    <stat.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <div className="font-display text-lg md:text-xl font-semibold text-primary-foreground">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-primary-foreground/60 font-body">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="relative">
+              {/* Glow effect behind mockup */}
+              <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-2xl" />
+              
+              {/* Mockup image */}
+              <img
+                src={appMockup}
+                alt="Dar360 Dashboard showing activity feed"
+                className="relative w-full max-w-lg mx-auto rounded-2xl shadow-large"
+              />
             </div>
           </motion.div>
         </div>
@@ -156,15 +103,15 @@ export const Hero = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border-2 border-primary-foreground/30 flex items-start justify-center pt-2"
+          className="w-6 h-10 rounded-full border-2 border-cream/30 flex items-start justify-center pt-2"
         >
-          <div className="w-1.5 h-3 rounded-full bg-primary-foreground/50"></div>
+          <div className="w-1.5 h-3 rounded-full bg-cream/50" />
         </motion.div>
       </motion.div>
     </section>
