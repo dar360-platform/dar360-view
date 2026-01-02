@@ -1,42 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Building2, Users, Home, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const navItems = [
-  { label: "What We Do", href: "#what-we-do" },
-  { label: "Who We Are", href: "#who-we-are" },
-  { label: "The App", href: "#app" },
+  { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
-];
-
-const portalLinks = [
-  {
-    id: "agent",
-    label: "Agent Portal",
-    description: "Manage properties & contracts",
-    icon: Building2,
-    href: "/agent/auth",
-    color: "bg-accent text-accent-foreground",
-  },
-  {
-    id: "owner",
-    label: "Owner Portal",
-    description: "Track your investments",
-    icon: Users,
-    href: "/owner/auth",
-    color: "bg-primary text-primary-foreground",
-  },
-  {
-    id: "tenant",
-    label: "Tenant Portal",
-    description: "View contracts & payments",
-    icon: Home,
-    href: "/tenant/auth",
-    color: "bg-green-600 text-white",
-  },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const Navbar = () => {
@@ -90,7 +62,7 @@ export const Navbar = () => {
                   className={`font-body text-sm font-medium transition-colors ${
                     isScrolled
                       ? "text-muted-foreground hover:text-foreground"
-                      : "text-primary-foreground/80 hover:text-primary-foreground"
+                      : "text-cream/80 hover:text-cream"
                   }`}
                 >
                   {item.label}
@@ -101,7 +73,7 @@ export const Navbar = () => {
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3">
               <Link to="/agent/auth">
-                <Button variant={isScrolled ? "gold" : "hero-outline"} size="sm">
+                <Button variant={isScrolled ? "gold" : "hero-outline"} size="sm" className="rounded-lg">
                   Sign In
                 </Button>
               </Link>
@@ -111,7 +83,7 @@ export const Navbar = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isScrolled ? "text-foreground" : "text-primary-foreground"
+                isScrolled ? "text-foreground" : "text-cream"
               }`}
               aria-label="Toggle menu"
             >
@@ -165,42 +137,23 @@ export const Navbar = () => {
                 ))}
               </div>
 
-              {/* Portal Links */}
+              {/* Sign In Button */}
               <div className="px-4 py-6 mt-auto">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-4">
-                  Sign In / Sign Up
-                </p>
-                <div className="space-y-3">
-                  {portalLinks.map((portal, index) => (
-                    <motion.div
-                      key={portal.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + index * 0.05 }}
-                    >
-                      <Link
-                        to={portal.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50 hover:border-accent/50 transition-all active:scale-[0.98]"
-                      >
-                        <div className={`w-12 h-12 rounded-xl ${portal.color} flex items-center justify-center flex-shrink-0`}>
-                          <portal.icon className="w-6 h-6" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-display font-semibold text-foreground">{portal.label}</p>
-                          <p className="text-sm text-muted-foreground font-body">{portal.description}</p>
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
+                <Link
+                  to="/agent/auth"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block"
+                >
+                  <Button variant="gold" size="lg" className="w-full rounded-xl">
+                    Sign In
+                  </Button>
+                </Link>
               </div>
 
               {/* Footer */}
               <div className="px-4 py-6 border-t border-border/30">
                 <p className="text-xs text-muted-foreground text-center font-body">
-                  © 2025 Dar360. Built for UAE Real Estate.
+                  © 2026 Dar360. Built for UAE Real Estate.
                 </p>
               </div>
             </div>

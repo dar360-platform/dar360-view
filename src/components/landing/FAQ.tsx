@@ -8,51 +8,44 @@ import {
 
 const faqs = [
   {
-    question: "Is Dar360 a CRM?",
-    answer: "No. We're a rental lifecycle platform. Use us alongside your CRM. Dar360 focuses on the rental transaction and ongoing tenancy experience — listings, contracts, Ejari, and owner transparency — not lead management or marketing automation.",
+    question: "Is this a CRM?",
+    answer: "Nope. CRMs track leads for your boss. Dar360 shows your work to owners. Big difference.",
   },
   {
-    question: "Are digital signatures legal in UAE?",
-    answer: "Yes. UAE Pass signatures are government-recognized. OTP is valid for rentals under 10 years per UAE Electronic Transactions Law. All contracts signed through Dar360 are legally binding.",
+    question: "Are digital signatures actually legal?",
+    answer: "Yes. UAE Pass = government-recognized. OTP works for rentals under 10 years. Fully legal.",
   },
   {
-    question: "How does Ejari submission work?",
-    answer: "After contract signing, click \"Submit Ejari\" — we handle the rest. Certificate delivered within 24 hours. Cost: AED 299. No more driving to typing centers or waiting in queues.",
+    question: "What can owners actually see?",
+    answer: "Only their property: viewings, inquiries, contract status. Not your other clients. Not your notes. Just their property.",
   },
   {
-    question: "Can owners see all my activity?",
-    answer: "Only for their linked properties. They see viewings, shares, and contract status — proving your efforts without weekly calls. Your other clients' data remains private.",
+    question: "Do I have to verify my RERA license?",
+    answer: "Yes — it takes 24 hours. This is what makes owners trust you.",
   },
   {
-    question: "Do I need to verify my RERA license?",
-    answer: "Yes. We verify all agents to build trust with property owners. Your \"RERA Verified\" badge is displayed on your profile, instantly establishing credibility.",
-  },
-  {
-    question: "Is there a free trial?",
-    answer: "Yes! 14 days free, no credit card required. Full access to all features so you can see the difference Dar360 makes before committing.",
+    question: "What's the catch with the free trial?",
+    answer: "No catch. 14 days. Full access. No card. You decide after.",
   },
 ];
 
 export const FAQ = () => {
   return (
-    <section id="faq" className="py-24 lg:py-32 bg-muted/30">
+    <section id="faq" className="py-24 lg:py-32 bg-secondary bg-noise">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-medium text-sm mb-4">
-            FAQ
+          <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-body text-sm font-medium mb-6 uppercase tracking-wider">
+            Questions
           </span>
-          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-foreground mb-6">
-            Frequently Asked Questions
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground">
+            Let's clear things up.
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-body">
-            Everything you need to know about Dar360.
-          </p>
         </motion.div>
 
         <motion.div
@@ -60,19 +53,19 @@ export const FAQ = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto"
+          className="max-w-2xl mx-auto"
         >
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-card border border-border/50 rounded-2xl px-6 data-[state=open]:shadow-soft"
+                className="bg-card border border-border/30 rounded-xl px-6 data-[state=open]:shadow-soft overflow-hidden"
               >
-                <AccordionTrigger className="font-display text-lg font-semibold text-foreground hover:text-accent hover:no-underline py-6">
+                <AccordionTrigger className="font-display text-lg font-semibold text-foreground hover:text-accent hover:no-underline py-5 text-left">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground font-body leading-relaxed pb-6">
+                <AccordionContent className="text-muted-foreground font-body leading-relaxed pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
