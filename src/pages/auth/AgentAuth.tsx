@@ -52,7 +52,7 @@ export const AgentAuth = () => {
         >
           {/* Logo & Title */}
           <div className="text-center mb-8">
-            <img src={logo} alt="Dar360" className="w-16 h-16 mx-auto mb-4 object-contain" />
+            <img src={logo} alt="Dar360" className="w-32 h-32 mx-auto mb-4 object-contain" />
             <h1 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-2">
               {isSignUp ? "Create Agent Account" : "Agent Portal"}
             </h1>

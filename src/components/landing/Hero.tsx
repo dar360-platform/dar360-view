@@ -74,7 +74,6 @@ export const Hero = () => {
               transition={{ duration: 0.7, delay: 0.5 }}
               className="text-cream/50 text-sm font-body mb-6"
             >
-              14 days free • No credit card • RERA verified
             </motion.p>
 
             {/* Trust badges */}
