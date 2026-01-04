@@ -106,19 +106,18 @@ export const Hero = () => {
             transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
             className="relative hidden lg:flex justify-center items-center"
           >
-            <div className="relative">
+            <div className="relative" style={{ transform: "rotate(8deg)" }}>
               {/* Glow effect behind mockup */}
               <div className="absolute -inset-12 bg-accent/15 rounded-[80px] blur-3xl" />
-              
+
               {/* Phone mockup with float animation and rotation */}
               <motion.img
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 src={phoneMockup}
                 alt="Dar360 Agent Dashboard showing property management"
-                className="relative w-[320px] xl:w-[380px] 2xl:w-[420px]"
-                style={{ 
-                  transform: "rotate(3deg)",
+                className="relative w-[250px] xl:w-[280px] 2xl:w-[320px]"
+                style={{
                   filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))"
                 }}
               />
@@ -135,9 +134,9 @@ export const Hero = () => {
             <img
               src={phoneMockup}
               alt="Dar360 Agent Dashboard"
-              className="w-[260px] sm:w-[300px]"
-              style={{ 
-                transform: "rotate(2deg)",
+              className="w-[120px] sm:w-[150px]"
+              style={{
+                transform: "rotate(6deg)",
                 filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))"
               }}
             />

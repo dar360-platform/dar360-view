@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
+import uaePass from "@/assets/uae_pass.png";
+import rera from "@/assets/rere.png";
+import landDept from "@/assets/land_depart.png";
+import dubaiGovt from "@/assets/dubai_govt.png";
 
 const trustItems = [
-  { name: "UAE Pass", subtitle: "Integrated" },
-  { name: "RERA", subtitle: "Verified" },
-  { name: "Ejari", subtitle: "Ready" },
-  { name: "Dubai Land Dept", subtitle: "Compliant" },
+  { name: "UAE Pass", subtitle: "Integrated", logo: uaePass },
+  { name: "RERA", subtitle: "Verified", logo: rera },
+  { name: "Ejari", subtitle: "Ready", logo: dubaiGovt },
+  { name: "Dubai Land Department", subtitle: "Compliant", logo: landDept },
 ];
 
 export const TrustIntegrations = () => {
@@ -40,11 +44,9 @@ export const TrustIntegrations = () => {
               viewport={{ once: true }}
               className="flex flex-col items-center text-center"
             >
-              {/* Placeholder for logo - using styled text badge */}
-              <div className="w-14 h-14 rounded-xl bg-primary/5 border border-border/50 flex items-center justify-center mb-3">
-                <span className="font-display text-lg font-semibold text-primary">
-                  {item.name.charAt(0)}
-                </span>
+              {/* Logo */}
+              <div className="w-24 h-24 rounded-xl bg-primary/5 border border-border/50 flex items-center justify-center mb-3 p-3">
+                <img src={item.logo} alt={item.name} className="w-full h-full object-contain" />
               </div>
               <p className="font-body text-sm font-medium text-foreground">
                 {item.name}

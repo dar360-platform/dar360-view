@@ -33,7 +33,7 @@ const steps = [
     icon: FileSignature,
     bullets: [
       "RERA-compliant contract",
-      "UAE Pass or OTP",
+      "UAE Pass signing",
       "No printing, no meeting",
     ],
     size: "large",
@@ -45,7 +45,7 @@ const steps = [
     icon: Send,
     bullets: [
       "Submit from dashboard",
-      "Cert in 24 hours",
+      "Contract in 24 hours",
       "No typing center",
     ],
     size: "small",

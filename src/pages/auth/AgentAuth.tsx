@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowLeft, Shield, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 import logo from "@/assets/logo.png";
+import uaePass from "@/assets/uae_pass.png";
 
 export const AgentAuth = () => {
   const [searchParams] = useSearchParams();
@@ -72,7 +73,7 @@ export const AgentAuth = () => {
               className="w-full mb-6 h-14 text-base font-medium border-2 hover:bg-accent/5"
               onClick={handleUAEPassLogin}
             >
-              <Shield className="w-5 h-5 mr-3 text-accent" />
+              <img src={uaePass} alt="UAE Pass" className="w-20 h-20 mr-3 object-contain" />
               Continue with UAE Pass
             </Button>
 
