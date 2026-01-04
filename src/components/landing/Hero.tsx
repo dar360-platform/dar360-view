@@ -17,15 +17,15 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-forest-light opacity-60 z-0" />
       
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 pt-24 pb-32 lg:pt-32 lg:pb-40">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-8 items-center">
-          {/* Left Side - Text (60%) */}
+      <div className="container mx-auto px-4 relative z-10 py-20 lg:py-0">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-4 items-center min-h-[calc(100vh-80px)]">
+          {/* Left Side - Text */}
           <div className="max-w-xl">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-accent font-body text-sm font-medium mb-8 uppercase tracking-wider"
+              className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-accent font-body text-sm font-medium mb-6 uppercase tracking-wider"
             >
               For UAE Rental Agents
             </motion.span>
@@ -45,7 +45,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-lg sm:text-xl text-cream/80 font-body leading-relaxed mb-10"
+              className="text-lg sm:text-xl text-cream/80 font-body leading-relaxed mb-8"
             >
               Every viewing logged. Every click tracked. 
               Every effort visible. Finally, proof that speaks for itself.
@@ -55,7 +55,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="mb-8"
+              className="mb-6"
             >
               <Button
                 variant="gold"
@@ -72,7 +72,7 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="text-cream/50 text-sm font-body mb-8"
+              className="text-cream/50 text-sm font-body mb-6"
             >
               14 days free • No credit card • RERA verified
             </motion.p>
@@ -99,27 +99,27 @@ export const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right Side - Phone Mockup (40%) */}
+          {/* Right Side - Phone Mockup (Desktop) */}
           <motion.div
-            initial={{ opacity: 0, x: 60, scale: 0.9 }}
+            initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
-            className="relative hidden lg:flex justify-center lg:justify-end"
+            transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+            className="relative hidden lg:flex justify-center items-center"
           >
             <div className="relative">
               {/* Glow effect behind mockup */}
-              <div className="absolute -inset-8 bg-accent/10 rounded-[60px] blur-3xl" />
+              <div className="absolute -inset-12 bg-accent/15 rounded-[80px] blur-3xl" />
               
-              {/* Phone mockup with float animation */}
+              {/* Phone mockup with float animation and rotation */}
               <motion.img
-                animate={{ y: [0, -10, 0] }}
+                animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 src={phoneMockup}
                 alt="Dar360 Agent Dashboard showing property management"
-                className="relative w-[280px] xl:w-[340px] drop-shadow-2xl"
+                className="relative w-[320px] xl:w-[380px] 2xl:w-[420px]"
                 style={{ 
                   transform: "rotate(3deg)",
-                  filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))"
+                  filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))"
                 }}
               />
             </div>
@@ -130,33 +130,20 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="lg:hidden flex justify-center mt-8"
+            className="lg:hidden flex justify-center"
           >
             <img
               src={phoneMockup}
               alt="Dar360 Agent Dashboard"
-              className="w-[240px] sm:w-[280px] drop-shadow-2xl"
-              style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.25))" }}
+              className="w-[260px] sm:w-[300px]"
+              style={{ 
+                transform: "rotate(2deg)",
+                filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))"
+              }}
             />
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border-2 border-cream/30 flex items-start justify-center pt-2"
-        >
-          <div className="w-1.5 h-3 rounded-full bg-cream/50" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
