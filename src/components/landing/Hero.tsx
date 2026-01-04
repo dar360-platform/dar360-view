@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import appMockup from "@/assets/app-mockup.png";
+import phoneMockup from "@/assets/phone-mockup.png";
 
 export const Hero = () => {
   const scrollToSection = (href: string) => {
@@ -12,14 +12,14 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-primary bg-grain">
       {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-forest-light opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-forest-light opacity-60 z-0" />
       
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Side - Text */}
+      <div className="container mx-auto px-4 relative z-10 pt-24 pb-32 lg:pt-32 lg:pb-40">
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-8 items-center">
+          {/* Left Side - Text (60%) */}
           <div className="max-w-xl">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -34,11 +34,11 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-primary-foreground leading-tight mb-6"
+              className="hero-headline font-display font-semibold text-primary-foreground mb-6"
             >
               Stop Chasing{" "}
-              <br />
-              Owners for Trust.
+              <br className="hidden sm:block" />
+              Owners for <span className="text-accent">Trust.</span>
             </motion.h1>
 
             <motion.p
@@ -55,6 +55,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
+              className="mb-8"
             >
               <Button
                 variant="gold"
@@ -71,30 +72,72 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="text-cream/50 text-sm font-body mt-6"
+              className="text-cream/50 text-sm font-body mb-8"
             >
               14 days free • No credit card • RERA verified
             </motion.p>
+
+            {/* Trust badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-wrap items-center gap-4 text-cream/60 font-body text-sm"
+            >
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                UAE Pass Integrated
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                RERA Verified
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                Ejari Ready
+              </span>
+            </motion.div>
           </div>
 
-          {/* Right Side - App Mockup */}
+          {/* Right Side - Phone Mockup (40%) */}
           <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            initial={{ opacity: 0, x: 60, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative hidden lg:block"
+            transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
+            className="relative hidden lg:flex justify-center lg:justify-end"
           >
             <div className="relative">
               {/* Glow effect behind mockup */}
-              <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-2xl" />
+              <div className="absolute -inset-8 bg-accent/10 rounded-[60px] blur-3xl" />
               
-              {/* Mockup image */}
-              <img
-                src={appMockup}
-                alt="Dar360 Dashboard showing activity feed"
-                className="relative w-full max-w-lg mx-auto rounded-2xl shadow-large"
+              {/* Phone mockup with float animation */}
+              <motion.img
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                src={phoneMockup}
+                alt="Dar360 Agent Dashboard showing property management"
+                className="relative w-[280px] xl:w-[340px] drop-shadow-2xl"
+                style={{ 
+                  transform: "rotate(3deg)",
+                  filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))"
+                }}
               />
             </div>
+          </motion.div>
+
+          {/* Mobile mockup - shown below on mobile/tablet */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="lg:hidden flex justify-center mt-8"
+          >
+            <img
+              src={phoneMockup}
+              alt="Dar360 Agent Dashboard"
+              className="w-[240px] sm:w-[280px] drop-shadow-2xl"
+              style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.25))" }}
+            />
           </motion.div>
         </div>
       </div>
@@ -104,7 +147,7 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

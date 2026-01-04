@@ -17,7 +17,7 @@ export const FinalCTA = () => {
   };
 
   return (
-    <section className="py-24 lg:py-32 bg-primary">
+    <section className="section-padding bg-primary bg-grain">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -29,16 +29,16 @@ export const FinalCTA = () => {
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-primary-foreground mb-4">
             Ready to stop explaining yourself?
           </h2>
-          <p className="text-cream/80 font-body text-lg mb-10">
+          <p className="text-cream/80 font-body text-lg lg:text-xl mb-10">
             Let your dashboard do the talking.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Button
               variant="gold"
               size="xl"
               onClick={handleTrial}
-              className="rounded-xl"
+              className="rounded-xl min-w-[200px]"
             >
               Start Free Trial
               <ArrowRight className="w-5 h-5" />
@@ -47,7 +47,7 @@ export const FinalCTA = () => {
               variant="hero-outline"
               size="xl"
               onClick={handleDemo}
-              className="rounded-xl"
+              className="rounded-xl min-w-[200px]"
             >
               <Calendar className="w-5 h-5" />
               Book a Demo

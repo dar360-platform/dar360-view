@@ -65,6 +65,7 @@ export default {
           dark: "hsl(var(--cream-dark))",
         },
         footer: "hsl(var(--footer))",
+        "secondary-text": "hsl(var(--secondary-text))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
