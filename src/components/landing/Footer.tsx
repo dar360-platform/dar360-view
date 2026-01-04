@@ -47,8 +47,8 @@ export const Footer = () => {
             >
               FAQ
             </button>
-            <a 
-              href="mailto:abdur.rahman@nyu.edu"
+            <a
+              href="mailto:hello@dar360.ae"
               className="text-cream/70 hover:text-cream transition-colors"
             >
               Contact
@@ -58,11 +58,11 @@ export const Footer = () => {
           {/* Contact */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <a
-              href="mailto:abdur.rahman@nyu.edu"
+              href="mailto:hello@dar360.ae"
               className="flex items-center gap-2 text-cream/70 hover:text-cream transition-colors font-body text-sm"
             >
               <Mail className="w-4 h-4" />
-              abdur.rahman@nyu.edu
+              hello@dar360.ae
             </a>
             <a
               href="https://w.app/dar360"
