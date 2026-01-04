@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     question: "Are digital signatures legal in UAE?",
-    answer: "Yes. UAE Pass = government-recognized. OTP works for rentals under 10 years. Fully legal.",
+    answer: "Yes. UAE Pass = government-recognized. Digital signatures works for rentals under 10 years. Fully legal.",
   },
   {
     question: "What can owners see?",
