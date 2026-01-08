@@ -12,16 +12,12 @@ export const AgentAuth = () => {
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
-    // TODO: Connect to backend auth service
+    // Dummy auth - navigate to dashboard
     setTimeout(() => {
       setIsLoading(false);
-      toast.info(
-        mode === "signup"
-          ? "Agent registration coming soon!"
-          : "Agent login coming soon!",
-        { description: "We're working hard to bring you the best experience." }
-      );
-    }, 1000);
+      toast.success(mode === "signup" ? "Account created!" : "Welcome back!");
+      navigate("/agent/dashboard");
+    }, 800);
   };
 
   const handleUAEPassLogin = () => {
