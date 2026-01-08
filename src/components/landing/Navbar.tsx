@@ -72,7 +72,7 @@ export const Navbar = () => {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link to="/agent/auth">
+              <Link to="/auth">
                 <Button variant={isScrolled ? "gold" : "hero-outline"} size="sm" className="rounded-lg">
                   Sign In
                 </Button>
@@ -140,7 +140,7 @@ export const Navbar = () => {
               {/* Sign In Button */}
               <div className="px-4 py-6 mt-auto">
                 <Link
-                  to="/agent/auth"
+                  to="/auth"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block"
                 >
