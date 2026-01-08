@@ -12,16 +12,12 @@ export const OwnerAuth = () => {
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
-    // TODO: Connect to backend auth service
+    // Dummy auth - navigate to dashboard
     setTimeout(() => {
       setIsLoading(false);
-      toast.info(
-        mode === "signup"
-          ? "Owner registration coming soon!"
-          : "Owner login coming soon!",
-        { description: "We're working hard to bring you the best experience." }
-      );
-    }, 1000);
+      toast.success(mode === "signup" ? "Account created!" : "Welcome back!");
+      navigate("/owner/dashboard");
+    }, 800);
   };
 
   const handleUAEPassLogin = () => {

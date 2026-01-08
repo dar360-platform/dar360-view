@@ -12,16 +12,12 @@ export const TenantAuth = () => {
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
-    // TODO: Connect to backend auth service
+    // Dummy auth - navigate to dashboard
     setTimeout(() => {
       setIsLoading(false);
-      toast.info(
-        mode === "signup"
-          ? "Tenant registration coming soon!"
-          : "Tenant login coming soon!",
-        { description: "We're working hard to bring you the best experience." }
-      );
-    }, 1000);
+      toast.success(mode === "signup" ? "Account created!" : "Welcome back!");
+      navigate("/tenant/dashboard");
+    }, 800);
   };
 
   const handleUAEPassLogin = () => {
