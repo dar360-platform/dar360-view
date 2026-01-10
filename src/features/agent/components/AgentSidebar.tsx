@@ -49,7 +49,7 @@ const NavContent = ({
     <div className="h-full flex flex-col">
       {/* Logo */}
       <div className="p-4 border-b border-border/50">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/agent/dashboard" className="flex items-center gap-2">
           <img src={logo} alt="Dar360" className="w-8 h-8 object-contain" />
           <span className="font-display text-xl font-semibold">Dar360</span>
         </Link>
@@ -150,7 +150,7 @@ export const AgentSidebar = ({ activeTab, onTabChange }: AgentSidebarProps) => {
       {/* Mobile Header & Drawer */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-card border-b border-border/50">
         <div className="flex items-center justify-between px-4 h-14">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/agent/dashboard" className="flex items-center gap-2">
             <img src={logo} alt="Dar360" className="w-7 h-7 object-contain" />
             <span className="font-display text-lg font-semibold">Dar360</span>
           </Link>

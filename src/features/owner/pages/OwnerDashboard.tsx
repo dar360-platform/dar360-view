@@ -75,7 +75,7 @@ export const OwnerDashboard = () => {
       {/* Header */}
       <header className="border-b border-border/50 bg-card">
         <div className="container mx-auto px-4 flex items-center justify-between h-14">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/owner/dashboard" className="flex items-center gap-2">
             <img src={logo} alt="Dar360" className="w-8 h-8 object-contain" />
             <span className="font-display text-xl font-semibold">Dar360</span>
             <span className="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full ml-2">Owner</span>
