@@ -24,7 +24,7 @@ import {
   Viewing,
   Contract,
 } from "@/components/dashboard";
-import { AgentSidebar, AddPropertyModal, ScheduleViewingModal, CreateContractModal } from "../components";
+import { AgentSidebar, AddPropertyModal, ScheduleViewingModal, CreateContractModal, AgentSettings } from "../components";
 import { dummyProperties, dummyViewings, dummyContracts } from "../data/dummyData";
 import { toast } from "sonner";
 
@@ -228,12 +228,7 @@ export const AgentDashboard = () => {
           )}
 
           {/* Settings Tab */}
-          {activeTab === "settings" && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <h1 className="font-display text-2xl font-semibold mb-4">Settings</h1>
-              <p className="text-muted-foreground">Settings page coming soon...</p>
-            </motion.div>
-          )}
+          {activeTab === "settings" && <AgentSettings />}
         </div>
       </main>
 
