@@ -32,6 +32,7 @@ import {
   RequestViewingModal,
   SignContractModal,
   ApplicationCard,
+  TenantSettings,
 } from "../components";
 import {
   availableProperties,
@@ -444,12 +445,7 @@ export const TenantDashboard = () => {
           )}
 
           {/* Settings Tab */}
-          {activeTab === "settings" && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <h1 className="font-display text-2xl font-semibold mb-4">Settings</h1>
-              <p className="text-muted-foreground">Settings page coming soon...</p>
-            </motion.div>
-          )}
+          {activeTab === "settings" && <TenantSettings />}
         </div>
       </main>
 

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Building2, Calendar, FileText, Eye, LogOut, TrendingUp } from "lucide-react";
+import { Building2, FileText, Eye, LogOut, TrendingUp, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StatsCard, PropertyCard, ViewingCard, ContractCard, Property, Viewing, Contract } from "@/components/dashboard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { OwnerSettings } from "../components";
 import logo from "@/assets/logo.png";
 
 // Dummy data for owner
@@ -73,63 +74,78 @@ export const OwnerDashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border/50 bg-card">
+      <header className="border-b border-border/50 bg-card sticky top-0 z-40">
         <div className="container mx-auto px-4 flex items-center justify-between h-14">
           <Link to="/owner/dashboard" className="flex items-center gap-2">
             <img src={logo} alt="Dar360" className="w-8 h-8 object-contain" />
             <span className="font-display text-xl font-semibold">Dar360</span>
             <span className="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full ml-2">Owner</span>
           </Link>
-          <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
-            <LogOut className="w-4 h-4 mr-2" /> Sign Out
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant={activeTab === "settings" ? "secondary" : "ghost"} 
+              size="sm" 
+              onClick={() => setActiveTab("settings")}
+            >
+              <Settings className="w-4 h-4" />
+              <span className="hidden sm:inline ml-2">Settings</span>
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
+              <LogOut className="w-4 h-4" />
+              <span className="hidden sm:inline ml-2">Sign Out</span>
+            </Button>
+          </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-6 max-w-6xl">
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-          <div>
-            <h1 className="font-display text-2xl font-semibold">Welcome, Sara</h1>
-            <p className="text-muted-foreground">Track your property activity and agent performance</p>
-          </div>
+        {activeTab === "settings" ? (
+          <OwnerSettings />
+        ) : (
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+            <div>
+              <h1 className="font-display text-2xl font-semibold">Welcome, Sara</h1>
+              <p className="text-muted-foreground">Track your property activity and agent performance</p>
+            </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <StatsCard title="Your Properties" value={stats.totalProperties} icon={Building2} />
-            <StatsCard title="Total Viewings" value={stats.totalViewings} icon={Eye} variant="accent" />
-            <StatsCard title="Interested Tenants" value={stats.interested} icon={TrendingUp} variant="success" />
-            <StatsCard title="Pending Contracts" value={stats.pendingContracts} icon={FileText} variant="warning" />
-          </div>
+            {/* Stats */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatsCard title="Your Properties" value={stats.totalProperties} icon={Building2} />
+              <StatsCard title="Total Viewings" value={stats.totalViewings} icon={Eye} variant="accent" />
+              <StatsCard title="Interested Tenants" value={stats.interested} icon={TrendingUp} variant="success" />
+              <StatsCard title="Pending Contracts" value={stats.pendingContracts} icon={FileText} variant="warning" />
+            </div>
 
-          {/* Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="viewings">Viewing History</TabsTrigger>
-              <TabsTrigger value="contracts">Contracts</TabsTrigger>
-            </TabsList>
+            {/* Tabs */}
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList>
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="viewings">Viewing History</TabsTrigger>
+                <TabsTrigger value="contracts">Contracts</TabsTrigger>
+              </TabsList>
 
-            <TabsContent value="overview" className="mt-6">
-              <div className="grid md:grid-cols-2 gap-5">
-                {ownerProperties.map(property => (
-                  <PropertyCard key={property.id} property={property} variant="owner" />
+              <TabsContent value="overview" className="mt-6">
+                <div className="grid md:grid-cols-2 gap-5">
+                  {ownerProperties.map(property => (
+                    <PropertyCard key={property.id} property={property} variant="owner" />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="viewings" className="mt-6 space-y-4">
+                {ownerViewings.map(viewing => (
+                  <ViewingCard key={viewing.id} viewing={viewing} variant="past" />
                 ))}
-              </div>
-            </TabsContent>
+              </TabsContent>
 
-            <TabsContent value="viewings" className="mt-6 space-y-4">
-              {ownerViewings.map(viewing => (
-                <ViewingCard key={viewing.id} viewing={viewing} variant="past" />
-              ))}
-            </TabsContent>
-
-            <TabsContent value="contracts" className="mt-6 space-y-4">
-              {ownerContracts.map(contract => (
-                <ContractCard key={contract.id} contract={contract} variant="owner" />
-              ))}
-            </TabsContent>
-          </Tabs>
-        </motion.div>
+              <TabsContent value="contracts" className="mt-6 space-y-4">
+                {ownerContracts.map(contract => (
+                  <ContractCard key={contract.id} contract={contract} variant="owner" />
+                ))}
+              </TabsContent>
+            </Tabs>
+          </motion.div>
+        )}
       </main>
     </div>
   );
