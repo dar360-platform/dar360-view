@@ -6,13 +6,10 @@ import {
   FileText,
   TrendingUp,
   Plus,
-  Search,
-  Filter,
-  Share2,
-  Eye,
+  DollarSign,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   StatsCard,
@@ -24,39 +21,49 @@ import {
   Viewing,
   Contract,
 } from "@/components/dashboard";
-import { AgentSidebar, AddPropertyModal, ScheduleViewingModal, CreateContractModal, AgentSettings } from "../components";
+import {
+  AgentSidebar,
+  AddPropertyModal,
+  ScheduleViewingModal,
+  CreateContractModal,
+  AgentSettings,
+  CommissionTracker,
+  AnalyticsDashboard,
+  EditPropertyModal,
+} from "../components";
 import { dummyProperties, dummyViewings, dummyContracts } from "../data/dummyData";
 import { toast } from "sonner";
 
-type Tab = "overview" | "properties" | "viewings" | "contracts" | "settings";
+type Tab = "overview" | "properties" | "viewings" | "contracts" | "commissions" | "analytics" | "settings";
 
 export const AgentDashboard = () => {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
   const [properties, setProperties] = useState<Property[]>(dummyProperties);
   const [viewings, setViewings] = useState<Viewing[]>(dummyViewings);
   const [contracts, setContracts] = useState<Contract[]>(dummyContracts);
-  
+
   const [showAddProperty, setShowAddProperty] = useState(false);
   const [showScheduleViewing, setShowScheduleViewing] = useState(false);
   const [showCreateContract, setShowCreateContract] = useState(false);
+  const [showEditProperty, setShowEditProperty] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [propertyFilter, setPropertyFilter] = useState<"all" | "available" | "reserved" | "rented">("all");
 
   const stats = {
     totalProperties: properties.length,
-    availableProperties: properties.filter(p => p.status === "available").length,
-    upcomingViewings: viewings.filter(v => new Date(v.date) >= new Date()).length,
-    signedContracts: contracts.filter(c => c.status === "signed").length,
+    availableProperties: properties.filter((p) => p.status === "available").length,
+    upcomingViewings: viewings.filter((v) => new Date(v.date) >= new Date()).length,
+    signedContracts: contracts.filter((c) => c.status === "signed").length,
   };
 
-  const filteredProperties = propertyFilter === "all" 
-    ? properties 
-    : properties.filter(p => p.status === propertyFilter);
+  const filteredProperties =
+    propertyFilter === "all" ? properties : properties.filter((p) => p.status === propertyFilter);
 
-  const upcomingViewings = viewings.filter(v => new Date(v.date) >= new Date());
-  const pastViewings = viewings.filter(v => new Date(v.date) < new Date());
+  const upcomingViewings = viewings.filter((v) => new Date(v.date) >= new Date());
+  const pastViewings = viewings.filter((v) => new Date(v.date) < new Date());
 
   const handleShareProperty = (id: string) => {
-    const property = properties.find(p => p.id === id);
+    const property = properties.find((p) => p.id === id);
     if (property) {
       const message = `🏠 ${property.building} - Unit ${property.unit}\n📍 ${property.area}\n💰 AED ${property.rent.toLocaleString()}/year\n🛏️ ${property.beds} beds • ${property.baths} baths\n\nContact me for viewing!`;
       window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, "_blank");
@@ -64,8 +71,25 @@ export const AgentDashboard = () => {
   };
 
   const handleLogOutcome = (id: string, outcome: Viewing["outcome"]) => {
-    setViewings(viewings.map(v => v.id === id ? { ...v, outcome } : v));
+    setViewings(viewings.map((v) => (v.id === id ? { ...v, outcome } : v)));
     toast.success("Viewing outcome logged");
+  };
+
+  const handleEditProperty = (id: string) => {
+    const property = properties.find((p) => p.id === id);
+    if (property) {
+      setSelectedProperty(property);
+      setShowEditProperty(true);
+    }
+  };
+
+  const handleUpdateProperty = (updatedProperty: Property) => {
+    setProperties(properties.map((p) => (p.id === updatedProperty.id ? updatedProperty : p)));
+  };
+
+  const handleDeleteProperty = (id: string) => {
+    setProperties(properties.filter((p) => p.id !== id));
+    toast.success("Property deleted");
   };
 
   return (
@@ -98,10 +122,12 @@ export const AgentDashboard = () => {
                 <div className="bg-card border border-border/50 rounded-xl p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="font-display font-semibold">Upcoming Viewings</h2>
-                    <Button variant="ghost" size="sm" onClick={() => setActiveTab("viewings")}>View All</Button>
+                    <Button variant="ghost" size="sm" onClick={() => setActiveTab("viewings")}>
+                      View All
+                    </Button>
                   </div>
                   <div className="space-y-3">
-                    {upcomingViewings.slice(0, 3).map(viewing => (
+                    {upcomingViewings.slice(0, 3).map((viewing) => (
                       <ViewingCard key={viewing.id} viewing={viewing} variant="upcoming" />
                     ))}
                     {upcomingViewings.length === 0 && (
@@ -113,23 +139,30 @@ export const AgentDashboard = () => {
                 <div className="bg-card border border-border/50 rounded-xl p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="font-display font-semibold">Recent Properties</h2>
-                    <Button variant="ghost" size="sm" onClick={() => setActiveTab("properties")}>View All</Button>
+                    <Button variant="ghost" size="sm" onClick={() => setActiveTab("properties")}>
+                      View All
+                    </Button>
                   </div>
                   <div className="space-y-3">
-                    {properties.slice(0, 3).map(property => (
-                      <div key={property.id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                    {properties.slice(0, 3).map((property) => (
+                      <div
+                        key={property.id}
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
+                      >
                         <div className="w-12 h-12 rounded-lg bg-muted overflow-hidden">
                           {property.images[0] ? (
                             <img src={property.images[0]} alt="" className="w-full h-full object-cover" />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center"><Building2 className="w-5 h-5 text-muted-foreground" /></div>
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Building2 className="w-5 h-5 text-muted-foreground" />
+                            </div>
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium truncate">{property.building}</p>
                           <p className="text-sm text-muted-foreground">{property.area}</p>
                         </div>
-                        <p className="text-sm font-medium text-accent">AED {(property.rent/1000).toFixed(0)}k</p>
+                        <p className="text-sm font-medium text-accent">AED {(property.rent / 1000).toFixed(0)}k</p>
                       </div>
                     ))}
                   </div>
@@ -158,11 +191,12 @@ export const AgentDashboard = () => {
               </Tabs>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filteredProperties.map(property => (
+                {filteredProperties.map((property) => (
                   <PropertyCard
                     key={property.id}
                     property={property}
                     onShare={handleShareProperty}
+                    onEdit={handleEditProperty}
                     onScheduleViewing={() => setShowScheduleViewing(true)}
                     onContract={() => setShowCreateContract(true)}
                   />
@@ -185,19 +219,26 @@ export const AgentDashboard = () => {
                 <div>
                   <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-3">Upcoming</h2>
                   <div className="space-y-3">
-                    {upcomingViewings.map(viewing => (
+                    {upcomingViewings.map((viewing) => (
                       <ViewingCard key={viewing.id} viewing={viewing} variant="upcoming" />
                     ))}
                     {upcomingViewings.length === 0 && (
-                      <EmptyState icon={Calendar} title="No upcoming viewings" description="Schedule a viewing for one of your properties" action={{ label: "Schedule Viewing", onClick: () => setShowScheduleViewing(true) }} />
+                      <EmptyState
+                        icon={Calendar}
+                        title="No upcoming viewings"
+                        description="Schedule a viewing for one of your properties"
+                        action={{ label: "Schedule Viewing", onClick: () => setShowScheduleViewing(true) }}
+                      />
                     )}
                   </div>
                 </div>
 
                 <div>
-                  <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-3">Past Viewings</h2>
+                  <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-3">
+                    Past Viewings
+                  </h2>
                   <div className="space-y-3">
-                    {pastViewings.map(viewing => (
+                    {pastViewings.map((viewing) => (
                       <ViewingCard key={viewing.id} viewing={viewing} variant="past" onLogOutcome={handleLogOutcome} />
                     ))}
                   </div>
@@ -217,15 +258,25 @@ export const AgentDashboard = () => {
               </div>
 
               <div className="space-y-4">
-                {contracts.map(contract => (
-                  <ContractCard key={contract.id} contract={contract} onSendForSignature={(id) => {
-                    setContracts(contracts.map(c => c.id === id ? { ...c, status: "pending_signature" } : c));
-                    toast.success("Contract sent for signature");
-                  }} />
+                {contracts.map((contract) => (
+                  <ContractCard
+                    key={contract.id}
+                    contract={contract}
+                    onSendForSignature={(id) => {
+                      setContracts(contracts.map((c) => (c.id === id ? { ...c, status: "pending_signature" } : c)));
+                      toast.success("Contract sent for signature");
+                    }}
+                  />
                 ))}
               </div>
             </motion.div>
           )}
+
+          {/* Commissions Tab */}
+          {activeTab === "commissions" && <CommissionTracker />}
+
+          {/* Analytics Tab */}
+          {activeTab === "analytics" && <AnalyticsDashboard />}
 
           {/* Settings Tab */}
           {activeTab === "settings" && <AgentSettings />}
@@ -233,8 +284,30 @@ export const AgentDashboard = () => {
       </main>
 
       <AddPropertyModal open={showAddProperty} onClose={() => setShowAddProperty(false)} onAdd={(p) => setProperties([p, ...properties])} />
-      <ScheduleViewingModal open={showScheduleViewing} onClose={() => setShowScheduleViewing(false)} onSchedule={(v) => setViewings([v, ...viewings])} properties={properties} />
-      <CreateContractModal open={showCreateContract} onClose={() => setShowCreateContract(false)} onCreate={(c) => setContracts([c, ...contracts])} properties={properties} />
+      <ScheduleViewingModal
+        open={showScheduleViewing}
+        onClose={() => setShowScheduleViewing(false)}
+        onSchedule={(v) => setViewings([v, ...viewings])}
+        properties={properties}
+      />
+      <CreateContractModal
+        open={showCreateContract}
+        onClose={() => setShowCreateContract(false)}
+        onCreate={(c) => setContracts([c, ...contracts])}
+        properties={properties}
+      />
+      {selectedProperty && (
+        <EditPropertyModal
+          open={showEditProperty}
+          onClose={() => {
+            setShowEditProperty(false);
+            setSelectedProperty(null);
+          }}
+          property={selectedProperty}
+          onUpdate={handleUpdateProperty}
+          onDelete={handleDeleteProperty}
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Building2,
@@ -9,17 +8,17 @@ import {
   Settings,
   LogOut,
   Menu,
-  X,
   Plus,
-  Share2,
   ChevronRight,
+  DollarSign,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-type Tab = "overview" | "properties" | "viewings" | "contracts" | "settings";
+type Tab = "overview" | "properties" | "viewings" | "contracts" | "commissions" | "analytics" | "settings";
 
 interface AgentSidebarProps {
   activeTab: Tab;
@@ -31,6 +30,8 @@ const navItems: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "properties", label: "Properties", icon: Building2 },
   { id: "viewings", label: "Viewings", icon: Calendar },
   { id: "contracts", label: "Contracts", icon: FileText },
+  { id: "commissions", label: "Commissions", icon: DollarSign },
+  { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
@@ -77,9 +78,7 @@ const NavContent = ({
             >
               <Icon className="w-5 h-5" />
               {item.label}
-              {isActive && (
-                <ChevronRight className="w-4 h-4 ml-auto" />
-              )}
+              {isActive && <ChevronRight className="w-4 h-4 ml-auto" />}
             </button>
           );
         })}
@@ -87,9 +86,7 @@ const NavContent = ({
 
       {/* Quick Actions */}
       <div className="p-3 border-t border-border/50">
-        <p className="text-xs text-muted-foreground px-3 mb-2 uppercase tracking-wider">
-          Quick Actions
-        </p>
+        <p className="text-xs text-muted-foreground px-3 mb-2 uppercase tracking-wider">Quick Actions</p>
         <button
           onClick={() => {
             onTabChange("properties");
@@ -120,9 +117,7 @@ const NavContent = ({
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium truncate">Ahmed Khan</p>
-            <p className="text-xs text-muted-foreground truncate">
-              ABC Real Estate
-            </p>
+            <p className="text-xs text-muted-foreground truncate">ABC Real Estate</p>
           </div>
         </div>
         <button
@@ -161,11 +156,7 @@ export const AgentSidebar = ({ activeTab, onTabChange }: AgentSidebarProps) => {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-72">
-              <NavContent
-                activeTab={activeTab}
-                onTabChange={onTabChange}
-                onClose={() => setMobileOpen(false)}
-              />
+              <NavContent activeTab={activeTab} onTabChange={onTabChange} onClose={() => setMobileOpen(false)} />
             </SheetContent>
           </Sheet>
         </div>

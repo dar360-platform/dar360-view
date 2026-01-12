@@ -6,15 +6,14 @@ import {
   FileText,
   Heart,
   Building2,
-  Filter,
   SlidersHorizontal,
   ClipboardList,
-  Eye,
   MapPin,
+  Wrench,
+  CreditCard,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   StatsCard,
@@ -33,6 +32,8 @@ import {
   SignContractModal,
   ApplicationCard,
   TenantSettings,
+  MaintenanceRequests,
+  PaymentOptions,
 } from "../components";
 import {
   availableProperties,
@@ -43,7 +44,7 @@ import {
 } from "../data/dummyData";
 import { toast } from "sonner";
 
-type Tab = "overview" | "browse" | "saved" | "viewings" | "applications" | "contracts" | "settings";
+type Tab = "overview" | "browse" | "saved" | "viewings" | "applications" | "contracts" | "maintenance" | "payments" | "settings";
 
 export const TenantDashboard = () => {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
@@ -52,29 +53,31 @@ export const TenantDashboard = () => {
   const [contracts, setContracts] = useState<Contract[]>(tenantContracts);
   const [applications, setApplications] = useState<Application[]>(tenantApplications);
   const [savedProperties, setSavedProperties] = useState<string[]>(["prop-001"]);
-  
+
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [showPropertyDetails, setShowPropertyDetails] = useState(false);
   const [showRequestViewing, setShowRequestViewing] = useState(false);
   const [showSignContract, setShowSignContract] = useState(false);
   const [selectedContract, setSelectedContract] = useState<Contract | null>(null);
-  
+
   const [searchQuery, setSearchQuery] = useState("");
   const [areaFilter, setAreaFilter] = useState<string>("all");
   const [bedsFilter, setBedsFilter] = useState<string>("all");
 
   const stats = {
     savedProperties: savedProperties.length,
-    upcomingViewings: viewings.filter(v => new Date(v.date) >= new Date()).length,
-    pendingApplications: applications.filter(a => a.status === "pending").length,
-    activeContracts: contracts.filter(c => c.status === "signed" || c.status === "pending_signature").length,
+    upcomingViewings: viewings.filter((v) => new Date(v.date) >= new Date()).length,
+    pendingApplications: applications.filter((a) => a.status === "pending").length,
+    activeContracts: contracts.filter((c) => c.status === "signed" || c.status === "pending_signature").length,
   };
 
-  const filteredProperties = properties.filter(p => {
-    const matchesSearch = p.building.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filteredProperties = properties.filter((p) => {
+    const matchesSearch =
+      p.building.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.area.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesArea = areaFilter === "all" || p.area === areaFilter;
-    const matchesBeds = bedsFilter === "all" || 
+    const matchesBeds =
+      bedsFilter === "all" ||
       (bedsFilter === "studio" && p.beds === 0) ||
       (bedsFilter === "1" && p.beds === 1) ||
       (bedsFilter === "2" && p.beds === 2) ||
@@ -82,14 +85,14 @@ export const TenantDashboard = () => {
     return matchesSearch && matchesArea && matchesBeds;
   });
 
-  const savedPropertyList = properties.filter(p => savedProperties.includes(p.id));
-  const upcomingViewings = viewings.filter(v => new Date(v.date) >= new Date());
-  const pastViewings = viewings.filter(v => new Date(v.date) < new Date());
+  const savedPropertyList = properties.filter((p) => savedProperties.includes(p.id));
+  const upcomingViewings = viewings.filter((v) => new Date(v.date) >= new Date());
+  const pastViewings = viewings.filter((v) => new Date(v.date) < new Date());
 
-  const areas = [...new Set(properties.map(p => p.area))];
+  const areas = [...new Set(properties.map((p) => p.area))];
 
   const handleViewProperty = (id: string) => {
-    const property = properties.find(p => p.id === id);
+    const property = properties.find((p) => p.id === id);
     if (property) {
       setSelectedProperty(property);
       setShowPropertyDetails(true);
@@ -98,7 +101,7 @@ export const TenantDashboard = () => {
 
   const handleSaveProperty = (id: string) => {
     if (savedProperties.includes(id)) {
-      setSavedProperties(savedProperties.filter(pid => pid !== id));
+      setSavedProperties(savedProperties.filter((pid) => pid !== id));
       toast.success("Removed from saved");
     } else {
       setSavedProperties([...savedProperties, id]);
@@ -107,7 +110,7 @@ export const TenantDashboard = () => {
   };
 
   const handleRequestViewing = (propertyId: string) => {
-    const property = properties.find(p => p.id === propertyId);
+    const property = properties.find((p) => p.id === propertyId);
     if (property) {
       setSelectedProperty(property);
       setShowPropertyDetails(false);
@@ -116,7 +119,7 @@ export const TenantDashboard = () => {
   };
 
   const handleViewingRequest = (data: { propertyId: string; date: string; time: string; notes?: string }) => {
-    const property = properties.find(p => p.id === data.propertyId);
+    const property = properties.find((p) => p.id === data.propertyId);
     if (!property) return;
 
     const newViewing: Viewing = {
@@ -135,18 +138,14 @@ export const TenantDashboard = () => {
   };
 
   const handleSignContract = (contractId: string) => {
-    setContracts(contracts.map(c => 
-      c.id === contractId 
-        ? { ...c, status: "signed" as const, signedAt: new Date().toISOString() }
-        : c
-    ));
+    setContracts(
+      contracts.map((c) => (c.id === contractId ? { ...c, status: "signed" as const, signedAt: new Date().toISOString() } : c))
+    );
     toast.success("Contract signed successfully!");
   };
 
   const handleWithdrawApplication = (id: string) => {
-    setApplications(applications.map(a => 
-      a.id === id ? { ...a, status: "withdrawn" as const } : a
-    ));
+    setApplications(applications.map((a) => (a.id === id ? { ...a, status: "withdrawn" as const } : a)));
     toast.success("Application withdrawn");
   };
 
@@ -172,26 +171,30 @@ export const TenantDashboard = () => {
               </div>
 
               {/* Quick Actions */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <div 
+              <div className="grid md:grid-cols-3 gap-4">
+                <div
                   className="bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20 rounded-xl p-5 cursor-pointer hover:border-accent/40 transition-colors"
                   onClick={() => setActiveTab("browse")}
                 >
                   <Search className="w-8 h-8 text-accent mb-3" />
                   <h3 className="font-display font-semibold text-lg">Browse Properties</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Discover {properties.length} available properties across Dubai
-                  </p>
+                  <p className="text-sm text-muted-foreground mt-1">Discover {properties.length} available properties</p>
                 </div>
-                <div 
+                <div
                   className="bg-card border border-border/50 rounded-xl p-5 cursor-pointer hover:border-accent/40 transition-colors"
-                  onClick={() => setActiveTab("viewings")}
+                  onClick={() => setActiveTab("maintenance")}
                 >
-                  <Calendar className="w-8 h-8 text-muted-foreground mb-3" />
-                  <h3 className="font-display font-semibold text-lg">My Viewings</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {stats.upcomingViewings} upcoming viewings scheduled
-                  </p>
+                  <Wrench className="w-8 h-8 text-muted-foreground mb-3" />
+                  <h3 className="font-display font-semibold text-lg">Maintenance</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Submit and track maintenance requests</p>
+                </div>
+                <div
+                  className="bg-card border border-border/50 rounded-xl p-5 cursor-pointer hover:border-accent/40 transition-colors"
+                  onClick={() => setActiveTab("payments")}
+                >
+                  <CreditCard className="w-8 h-8 text-muted-foreground mb-3" />
+                  <h3 className="font-display font-semibold text-lg">Payments</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Pay rent and view payment history</p>
                 </div>
               </div>
 
@@ -200,10 +203,12 @@ export const TenantDashboard = () => {
                 <div className="bg-card border border-border/50 rounded-xl p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="font-display font-semibold">Upcoming Viewings</h2>
-                    <Button variant="ghost" size="sm" onClick={() => setActiveTab("viewings")}>View All</Button>
+                    <Button variant="ghost" size="sm" onClick={() => setActiveTab("viewings")}>
+                      View All
+                    </Button>
                   </div>
                   <div className="space-y-3">
-                    {upcomingViewings.slice(0, 2).map(viewing => (
+                    {upcomingViewings.slice(0, 2).map((viewing) => (
                       <ViewingCard key={viewing.id} viewing={viewing} variant="upcoming" />
                     ))}
                   </div>
@@ -211,29 +216,38 @@ export const TenantDashboard = () => {
               )}
 
               {/* Pending Contracts */}
-              {contracts.filter(c => c.status === "pending_signature").length > 0 && (
+              {contracts.filter((c) => c.status === "pending_signature").length > 0 && (
                 <div className="bg-card border border-border/50 rounded-xl p-5">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="font-display font-semibold">Contracts Awaiting Signature</h2>
                   </div>
                   <div className="space-y-3">
-                    {contracts.filter(c => c.status === "pending_signature").map(contract => (
-                      <div key={contract.id} className="flex items-center justify-between p-4 bg-amber-500/5 border border-amber-500/20 rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <FileText className="w-5 h-5 text-amber-600" />
-                          <div>
-                            <p className="font-medium">{contract.propertyTitle}</p>
-                            <p className="text-sm text-muted-foreground">Ready for signature</p>
+                    {contracts
+                      .filter((c) => c.status === "pending_signature")
+                      .map((contract) => (
+                        <div
+                          key={contract.id}
+                          className="flex items-center justify-between p-4 bg-amber-500/5 border border-amber-500/20 rounded-lg"
+                        >
+                          <div className="flex items-center gap-3">
+                            <FileText className="w-5 h-5 text-amber-600" />
+                            <div>
+                              <p className="font-medium">{contract.propertyTitle}</p>
+                              <p className="text-sm text-muted-foreground">Ready for signature</p>
+                            </div>
                           </div>
+                          <Button
+                            variant="gold"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedContract(contract);
+                              setShowSignContract(true);
+                            }}
+                          >
+                            Sign Now
+                          </Button>
                         </div>
-                        <Button variant="gold" size="sm" onClick={() => {
-                          setSelectedContract(contract);
-                          setShowSignContract(true);
-                        }}>
-                          Sign Now
-                        </Button>
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               )}
@@ -266,8 +280,10 @@ export const TenantDashboard = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Areas</SelectItem>
-                    {areas.map(area => (
-                      <SelectItem key={area} value={area}>{area}</SelectItem>
+                    {areas.map((area) => (
+                      <SelectItem key={area} value={area}>
+                        {area}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -289,7 +305,7 @@ export const TenantDashboard = () => {
               <p className="text-sm text-muted-foreground">{filteredProperties.length} properties found</p>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filteredProperties.map(property => (
+                {filteredProperties.map((property) => (
                   <TenantPropertyCard
                     key={property.id}
                     property={property}
@@ -301,11 +317,7 @@ export const TenantDashboard = () => {
               </div>
 
               {filteredProperties.length === 0 && (
-                <EmptyState
-                  icon={Building2}
-                  title="No properties found"
-                  description="Try adjusting your search or filters"
-                />
+                <EmptyState icon={Building2} title="No properties found" description="Try adjusting your search or filters" />
               )}
             </motion.div>
           )}
@@ -317,7 +329,7 @@ export const TenantDashboard = () => {
 
               {savedPropertyList.length > 0 ? (
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {savedPropertyList.map(property => (
+                  {savedPropertyList.map((property) => (
                     <TenantPropertyCard
                       key={property.id}
                       property={property}
@@ -348,9 +360,7 @@ export const TenantDashboard = () => {
                   <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-3">Upcoming</h2>
                   <div className="space-y-3">
                     {upcomingViewings.length > 0 ? (
-                      upcomingViewings.map(viewing => (
-                        <ViewingCard key={viewing.id} viewing={viewing} variant="upcoming" />
-                      ))
+                      upcomingViewings.map((viewing) => <ViewingCard key={viewing.id} viewing={viewing} variant="upcoming" />)
                     ) : (
                       <EmptyState
                         icon={Calendar}
@@ -366,7 +376,7 @@ export const TenantDashboard = () => {
                   <div>
                     <h2 className="font-medium text-sm text-muted-foreground uppercase tracking-wider mb-3">Past Viewings</h2>
                     <div className="space-y-3">
-                      {pastViewings.map(viewing => (
+                      {pastViewings.map((viewing) => (
                         <ViewingCard key={viewing.id} viewing={viewing} variant="past" />
                       ))}
                     </div>
@@ -383,14 +393,14 @@ export const TenantDashboard = () => {
 
               {applications.length > 0 ? (
                 <div className="space-y-4">
-                  {applications.map(application => (
+                  {applications.map((application) => (
                     <ApplicationCard
                       key={application.id}
                       application={application}
                       onViewContract={(id) => {
-                        const app = applications.find(a => a.id === id);
+                        const app = applications.find((a) => a.id === id);
                         if (app) {
-                          const contract = contracts.find(c => c.propertyId === app.propertyId);
+                          const contract = contracts.find((c) => c.propertyId === app.propertyId);
                           if (contract) {
                             setSelectedContract(contract);
                             setShowSignContract(true);
@@ -419,14 +429,14 @@ export const TenantDashboard = () => {
 
               {contracts.length > 0 ? (
                 <div className="space-y-4">
-                  {contracts.map(contract => (
+                  {contracts.map((contract) => (
                     <ContractCard
                       key={contract.id}
                       contract={contract}
-                      variant="owner"
-                      onView={(id) => {
-                        const c = contracts.find(c => c.id === id);
-                        if (c && c.status === "pending_signature") {
+                      variant="tenant"
+                      onSign={(id) => {
+                        const c = contracts.find((ct) => ct.id === id);
+                        if (c) {
                           setSelectedContract(c);
                           setShowSignContract(true);
                         }
@@ -435,42 +445,60 @@ export const TenantDashboard = () => {
                   ))}
                 </div>
               ) : (
-                <EmptyState
-                  icon={FileText}
-                  title="No contracts yet"
-                  description="Contracts will appear here once you're approved for a property"
-                />
+                <EmptyState icon={FileText} title="No contracts yet" description="Contracts will appear here once created" />
               )}
             </motion.div>
           )}
+
+          {/* Maintenance Tab */}
+          {activeTab === "maintenance" && <MaintenanceRequests />}
+
+          {/* Payments Tab */}
+          {activeTab === "payments" && <PaymentOptions />}
 
           {/* Settings Tab */}
           {activeTab === "settings" && <TenantSettings />}
         </div>
       </main>
 
-      <PropertyDetailsModal
-        property={selectedProperty}
-        open={showPropertyDetails}
-        onClose={() => setShowPropertyDetails(false)}
-        onRequestViewing={handleRequestViewing}
-        onSave={handleSaveProperty}
-        isSaved={selectedProperty ? savedProperties.includes(selectedProperty.id) : false}
-      />
+      {/* Modals */}
+      {selectedProperty && (
+        <PropertyDetailsModal
+          open={showPropertyDetails}
+          onClose={() => {
+            setShowPropertyDetails(false);
+            setSelectedProperty(null);
+          }}
+          property={selectedProperty}
+          onRequestViewing={handleRequestViewing}
+          isSaved={savedProperties.includes(selectedProperty.id)}
+          onSave={handleSaveProperty}
+        />
+      )}
 
-      <RequestViewingModal
-        property={selectedProperty}
-        open={showRequestViewing}
-        onClose={() => setShowRequestViewing(false)}
-        onRequest={handleViewingRequest}
-      />
+      {selectedProperty && (
+        <RequestViewingModal
+          open={showRequestViewing}
+          onClose={() => {
+            setShowRequestViewing(false);
+            setSelectedProperty(null);
+          }}
+          property={selectedProperty}
+          onRequest={handleViewingRequest}
+        />
+      )}
 
-      <SignContractModal
-        contract={selectedContract}
-        open={showSignContract}
-        onClose={() => setShowSignContract(false)}
-        onSign={handleSignContract}
-      />
+      {selectedContract && (
+        <SignContractModal
+          open={showSignContract}
+          onClose={() => {
+            setShowSignContract(false);
+            setSelectedContract(null);
+          }}
+          contract={selectedContract}
+          onSign={handleSignContract}
+        />
+      )}
     </div>
   );
 };
