@@ -26,7 +26,8 @@ interface ContractCardProps {
   onView?: (id: string) => void;
   onSendForSignature?: (id: string) => void;
   onDownload?: (id: string) => void;
-  variant?: "agent" | "owner";
+  onSign?: (id: string) => void;
+  variant?: "agent" | "owner" | "tenant";
 }
 
 const statusStyles = {
@@ -58,6 +59,7 @@ export const ContractCard = ({
   onView,
   onSendForSignature,
   onDownload,
+  onSign,
   variant = "agent",
 }: ContractCardProps) => {
   const StatusIcon = statusIcons[contract.status];
@@ -150,6 +152,17 @@ export const ContractCard = ({
           >
             <Send className="w-4 h-4 mr-1.5" />
             Send for Signature
+          </Button>
+        )}
+
+        {variant === "tenant" && contract.status === "pending_signature" && (
+          <Button
+            variant="gold"
+            size="sm"
+            onClick={() => onSign?.(contract.id)}
+          >
+            <CheckCircle className="w-4 h-4 mr-1.5" />
+            Sign Contract
           </Button>
         )}
 

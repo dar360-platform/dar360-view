@@ -4,3 +4,5 @@ export { RequestViewingModal } from "./RequestViewingModal";
 export { SignContractModal } from "./SignContractModal";
 export { ApplicationCard } from "./ApplicationCard";
 export { TenantSettings } from "./TenantSettings";
+export { MaintenanceRequests } from "./MaintenanceRequests";
+export { PaymentOptions } from "./PaymentOptions";
