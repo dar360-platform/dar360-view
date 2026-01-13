@@ -12,13 +12,14 @@ import {
   LogOut,
   Menu,
   ChevronRight,
+  TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-type Tab = "overview" | "properties" | "viewings" | "rent" | "maintenance" | "documents" | "contracts" | "settings";
+type Tab = "overview" | "properties" | "viewings" | "agents" | "rent" | "maintenance" | "documents" | "contracts" | "settings";
 
 interface OwnerSidebarProps {
   activeTab: Tab;
@@ -29,6 +30,7 @@ const navItems: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "properties", label: "My Properties", icon: Building2 },
   { id: "viewings", label: "Viewing History", icon: Calendar },
+  { id: "agents", label: "Agent Activity", icon: TrendingUp },
   { id: "rent", label: "Rent Tracker", icon: Wallet },
   { id: "maintenance", label: "Maintenance", icon: Wrench },
   { id: "documents", label: "Documents", icon: FolderOpen },

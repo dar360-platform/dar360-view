@@ -12,7 +12,7 @@ import {
   Viewing,
   Contract,
 } from "@/components/dashboard";
-import { OwnerSidebar, OwnerSettings, RentTracker, DocumentVault, MaintenanceView } from "../components";
+import { OwnerSidebar, OwnerSettings, RentTracker, DocumentVault, MaintenanceView, AgentPerformance } from "../components";
 
 // Dummy data for owner
 const ownerProperties: Property[] = [
@@ -110,7 +110,7 @@ const ownerContracts: Contract[] = [
   },
 ];
 
-type Tab = "overview" | "properties" | "viewings" | "rent" | "maintenance" | "documents" | "contracts" | "settings";
+type Tab = "overview" | "properties" | "viewings" | "agents" | "rent" | "maintenance" | "documents" | "contracts" | "settings";
 
 export const OwnerDashboard = () => {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
@@ -239,6 +239,9 @@ export const OwnerDashboard = () => {
               </div>
             </motion.div>
           )}
+
+          {/* Agent Activity Tab */}
+          {activeTab === "agents" && <AgentPerformance />}
 
           {/* Rent Tracker Tab */}
           {activeTab === "rent" && <RentTracker />}
