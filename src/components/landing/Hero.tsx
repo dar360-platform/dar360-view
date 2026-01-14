@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import phoneMockup from "@/assets/phone-mockup.png";
+import agentScreen from "@/assets/agent_screen.png";
 
 export const Hero = () => {
   const scrollToSection = (href: string) => {
@@ -113,9 +113,9 @@ export const Hero = () => {
               <motion.img
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                src={phoneMockup}
+                src={agentScreen}
                 alt="Dar360 Agent Dashboard showing property management"
-                className="relative w-[250px] xl:w-[280px] 2xl:w-[320px]"
+                className="relative w-[300px] xl:w-[340px] 2xl:w-[380px]"
                 style={{
                   filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))"
                 }}
@@ -131,9 +131,9 @@ export const Hero = () => {
             className="lg:hidden flex justify-center"
           >
             <img
-              src={phoneMockup}
+              src={agentScreen}
               alt="Dar360 Agent Dashboard"
-              className="w-[120px] sm:w-[150px]"
+              className="w-[160px] sm:w-[200px]"
               style={{
                 transform: "rotate(6deg)",
                 filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))"

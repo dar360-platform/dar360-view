@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ownerDashboard from "@/assets/owner-dashboard-mockup.png";
+import ownerDashboard from "@/assets/owner_screen.png";
 
 export const ForOwners = () => {
   return (
