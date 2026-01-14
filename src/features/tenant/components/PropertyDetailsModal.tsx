@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Property } from "@/components/dashboard";
-import { Building2, Bed, Bath, Square, MapPin, Calendar, CreditCard, Shield, Phone, Heart, Share2 } from "lucide-react";
+import { Building2, Bed, Bath, Square, MapPin, Calendar, CreditCard, Shield, Phone, Heart, Share2, Star, MessageSquare, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface PropertyDetailsModalProps {
@@ -118,6 +118,57 @@ export const PropertyDetailsModal = ({
             <p className="text-sm text-muted-foreground mb-1">Property Type</p>
             <p className="font-medium capitalize">{property.type}</p>
           </div>
+
+          {/* Agent Info */}
+          {property.agent && (
+            <div className="bg-muted/30 border border-border/50 rounded-xl p-4">
+              <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">
+                Your Agent
+              </p>
+              <div className="flex items-start justify-between">
+                <div className="flex gap-3">
+                  <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                    <span className="text-sm font-semibold text-accent">
+                      {property.agent.name.split(" ").map((n) => n[0]).join("")}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{property.agent.name}</h4>
+                    <p className="text-sm text-muted-foreground">{property.agent.company}</p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <Star className="w-3.5 h-3.5 fill-warning text-warning" />
+                      <span className="text-sm font-medium">{property.agent.rating}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(`tel:${property.agent!.phone}`, "_self");
+                    }}
+                  >
+                    <Phone className="w-4 h-4 mr-1" />
+                    Call
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const message = `Hi ${property.agent!.name}, I'm interested in ${property.building} - Unit ${property.unit}`;
+                      window.open(`https://wa.me/${property.agent!.phone.replace(/\s+/g, "")}?text=${encodeURIComponent(message)}`, "_blank");
+                    }}
+                  >
+                    <MessageSquare className="w-4 h-4 mr-1" />
+                    WhatsApp
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex items-center gap-3 pt-4 border-t">

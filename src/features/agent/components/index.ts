@@ -3,3 +3,7 @@ export { AddPropertyModal } from "./AddPropertyModal";
 export { ScheduleViewingModal } from "./ScheduleViewingModal";
 export { CreateContractModal } from "./CreateContractModal";
 export { AgentSettings } from "./AgentSettings";
+export { CommissionTracker } from "./CommissionTracker";
+export { AnalyticsDashboard } from "./AnalyticsDashboard";
+export { EditPropertyModal } from "./EditPropertyModal";
+export { AgentMaintenanceRequests } from "./AgentMaintenanceRequests";

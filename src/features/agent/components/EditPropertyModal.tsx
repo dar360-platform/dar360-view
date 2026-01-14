@@ -22,7 +22,8 @@ interface EditPropertyModalProps {
   open: boolean;
   onClose: () => void;
   property: Property | null;
-  onSave: (property: Property) => void;
+  onUpdate: (property: Property) => void;
+  onDelete: (id: string) => void;
 }
 
 const areas = [
@@ -56,7 +57,8 @@ export const EditPropertyModal = ({
   open,
   onClose,
   property,
-  onSave,
+  onUpdate,
+  onDelete,
 }: EditPropertyModalProps) => {
   const [formData, setFormData] = useState({
     building: "",
@@ -120,8 +122,14 @@ export const EditPropertyModal = ({
       },
     };
 
-    onSave(updatedProperty);
+    onUpdate(updatedProperty);
     toast.success("Property updated successfully!");
+    onClose();
+  };
+
+  const handleDelete = () => {
+    if (!property) return;
+    onDelete(property.id);
     onClose();
   };
 
@@ -364,13 +372,18 @@ export const EditPropertyModal = ({
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t">
-            <Button type="button" variant="outline" onClick={onClose}>
-              Cancel
+          <div className="flex justify-between pt-4 border-t">
+            <Button type="button" variant="destructive" onClick={handleDelete}>
+              Delete Property
             </Button>
-            <Button type="submit" variant="gold">
-              Save Changes
-            </Button>
+            <div className="flex gap-3">
+              <Button type="button" variant="outline" onClick={onClose}>
+                Cancel
+              </Button>
+              <Button type="submit" variant="gold">
+                Save Changes
+              </Button>
+            </div>
           </div>
         </form>
       </DialogContent>

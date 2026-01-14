@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Mail, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -65,9 +66,16 @@ export const AddPropertyModal = ({
     ownerEmail: "",
     ownerPhone: "",
   });
+  const [inviteOwner, setInviteOwner] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const newProperty = {
       id: `prop-${Date.now()}`,
@@ -94,12 +102,20 @@ export const AddPropertyModal = ({
     };
 
     onAdd(newProperty);
-    toast.success("Property added successfully!", {
-      description: `${newProperty.building} - Unit ${newProperty.unit}`,
-    });
-    onClose();
+    setIsSubmitting(false);
 
-    // Reset form
+    if (inviteOwner && formData.ownerEmail) {
+      setShowSuccess(true);
+    } else {
+      toast.success("Property added successfully!", {
+        description: `${newProperty.building} - Unit ${newProperty.unit}`,
+      });
+      handleClose();
+    }
+  };
+
+  const handleClose = () => {
+    setShowSuccess(false);
     setFormData({
       building: "",
       unit: "",
@@ -115,10 +131,44 @@ export const AddPropertyModal = ({
       ownerEmail: "",
       ownerPhone: "",
     });
+    setInviteOwner(true);
+    onClose();
   };
 
+  if (showSuccess) {
+    return (
+      <Dialog open={open} onOpenChange={handleClose}>
+        <DialogContent className="max-w-md">
+          <div className="flex flex-col items-center text-center py-6">
+            <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
+              <Check className="w-8 h-8 text-green-500" />
+            </div>
+            <h2 className="font-display text-xl font-semibold mb-2">Property Added Successfully!</h2>
+            <p className="text-muted-foreground mb-6">
+              An invitation email has been sent to <strong>{formData.ownerEmail}</strong> with login credentials to access their owner portal.
+            </p>
+            <div className="bg-muted/50 rounded-lg p-4 w-full mb-6">
+              <div className="flex items-center gap-3 text-left">
+                <Mail className="w-5 h-5 text-accent" />
+                <div>
+                  <p className="text-sm font-medium">Invitation Sent</p>
+                  <p className="text-xs text-muted-foreground">
+                    {formData.ownerName} will receive an email with their login details
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Button variant="gold" onClick={handleClose} className="w-full">
+              Done
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display text-xl">
@@ -300,9 +350,11 @@ export const AddPropertyModal = ({
 
           {/* Owner Info */}
           <div className="space-y-4">
-            <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wider">
-              Owner Information
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="font-medium text-sm text-muted-foreground uppercase tracking-wider">
+                Owner Information
+              </h3>
+            </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="ownerName">Owner Name *</Label>
@@ -343,15 +395,32 @@ export const AddPropertyModal = ({
                 />
               </div>
             </div>
+
+            {/* Invite Owner Checkbox */}
+            <div className="flex items-start gap-3 p-4 bg-accent/5 border border-accent/20 rounded-lg">
+              <Checkbox
+                id="inviteOwner"
+                checked={inviteOwner}
+                onCheckedChange={(checked) => setInviteOwner(checked as boolean)}
+              />
+              <div className="space-y-1">
+                <Label htmlFor="inviteOwner" className="font-medium cursor-pointer">
+                  Send portal invitation to owner
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  The owner will receive an email with login credentials to access their Dar360 owner portal where they can track viewings, payments, and property status.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Actions */}
           <div className="flex justify-end gap-3 pt-4 border-t">
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={handleClose}>
               Cancel
             </Button>
-            <Button type="submit" variant="gold">
-              Add Property
+            <Button type="submit" variant="gold" disabled={isSubmitting}>
+              {isSubmitting ? "Adding..." : "Add Property"}
             </Button>
           </div>
         </form>

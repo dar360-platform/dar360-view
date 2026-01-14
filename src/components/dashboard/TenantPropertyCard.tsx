@@ -1,4 +1,4 @@
-import { Building2, Bed, Bath, Square, MapPin, Heart, Eye } from "lucide-react";
+import { Building2, Bed, Bath, Square, MapPin, Heart, Eye, Star, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -97,6 +97,22 @@ export const TenantPropertyCard = ({
             {property.sqft.toLocaleString()} sqft
           </span>
         </div>
+
+        {/* Agent Info */}
+        {property.agent && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground py-2 border-t border-border/50">
+            <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center">
+              <span className="text-[10px] font-semibold text-accent">
+                {property.agent.name.split(" ").map((n) => n[0]).join("")}
+              </span>
+            </div>
+            <span className="truncate">{property.agent.name}</span>
+            <div className="flex items-center gap-0.5 ml-auto">
+              <Star className="w-3 h-3 fill-warning text-warning" />
+              <span className="text-xs">{property.agent.rating}</span>
+            </div>
+          </div>
+        )}
 
         {/* Price */}
         <div className="flex items-center justify-between pt-2 border-t border-border/50">

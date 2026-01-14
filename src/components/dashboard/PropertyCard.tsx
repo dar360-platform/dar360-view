@@ -29,6 +29,13 @@ export interface Property {
     email: string;
     phone: string;
   };
+  agent?: {
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+    rating: number;
+  };
   viewingsCount: number;
   createdAt: string;
 }

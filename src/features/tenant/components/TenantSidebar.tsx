@@ -11,13 +11,15 @@ import {
   Menu,
   ChevronRight,
   ClipboardList,
+  Wrench,
+  CreditCard,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-type Tab = "overview" | "browse" | "saved" | "viewings" | "applications" | "contracts" | "settings";
+type Tab = "overview" | "browse" | "saved" | "viewings" | "applications" | "contracts" | "maintenance" | "payments" | "settings";
 
 interface TenantSidebarProps {
   activeTab: Tab;
@@ -31,6 +33,8 @@ const navItems: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "viewings", label: "My Viewings", icon: Calendar },
   { id: "applications", label: "Applications", icon: ClipboardList },
   { id: "contracts", label: "Contracts", icon: FileText },
+  { id: "maintenance", label: "Maintenance", icon: Wrench },
+  { id: "payments", label: "Payments", icon: CreditCard },
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
