@@ -12,13 +12,14 @@ import {
   ChevronRight,
   DollarSign,
   BarChart3,
+  Wrench,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-type Tab = "overview" | "properties" | "viewings" | "contracts" | "commissions" | "analytics" | "settings";
+type Tab = "overview" | "properties" | "viewings" | "contracts" | "maintenance" | "commissions" | "analytics" | "settings";
 
 interface AgentSidebarProps {
   activeTab: Tab;
@@ -30,6 +31,7 @@ const navItems: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "properties", label: "Properties", icon: Building2 },
   { id: "viewings", label: "Viewings", icon: Calendar },
   { id: "contracts", label: "Contracts", icon: FileText },
+  { id: "maintenance", label: "Maintenance", icon: Wrench },
   { id: "commissions", label: "Commissions", icon: DollarSign },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: Settings },
