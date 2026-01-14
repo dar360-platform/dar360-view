@@ -6,3 +6,4 @@ export { AgentSettings } from "./AgentSettings";
 export { CommissionTracker } from "./CommissionTracker";
 export { AnalyticsDashboard } from "./AnalyticsDashboard";
 export { EditPropertyModal } from "./EditPropertyModal";
+export { AgentMaintenanceRequests } from "./AgentMaintenanceRequests";

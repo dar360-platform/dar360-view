@@ -8,6 +8,7 @@ import {
   Plus,
   DollarSign,
   BarChart3,
+  Wrench,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -30,11 +31,12 @@ import {
   CommissionTracker,
   AnalyticsDashboard,
   EditPropertyModal,
+  AgentMaintenanceRequests,
 } from "../components";
 import { dummyProperties, dummyViewings, dummyContracts } from "../data/dummyData";
 import { toast } from "sonner";
 
-type Tab = "overview" | "properties" | "viewings" | "contracts" | "commissions" | "analytics" | "settings";
+type Tab = "overview" | "properties" | "viewings" | "contracts" | "maintenance" | "commissions" | "analytics" | "settings";
 
 export const AgentDashboard = () => {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
@@ -271,6 +273,9 @@ export const AgentDashboard = () => {
               </div>
             </motion.div>
           )}
+
+          {/* Maintenance Tab */}
+          {activeTab === "maintenance" && <AgentMaintenanceRequests />}
 
           {/* Commissions Tab */}
           {activeTab === "commissions" && <CommissionTracker />}
