@@ -9,7 +9,7 @@ import {
   Phone,
   Mail,
   Building2,
-  Clock,
+  
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
@@ -43,7 +43,6 @@ const assignedAgents = [
       viewingsLastMonth: 5,
       inquiriesThisMonth: 12,
       inquiriesLastMonth: 8,
-      avgResponseTime: "15 min",
       conversionRate: 25,
       leadsGenerated: 15,
     },
@@ -70,7 +69,6 @@ const assignedAgents = [
       viewingsLastMonth: 10,
       inquiriesThisMonth: 18,
       inquiriesLastMonth: 15,
-      avgResponseTime: "8 min",
       conversionRate: 33,
       leadsGenerated: 22,
     },
@@ -193,7 +191,7 @@ export const AgentPerformance = () => {
               <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
                 Performance This Month
               </h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div className="bg-muted/30 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-1">
                     <Eye className="w-4 h-4 text-accent" />
@@ -215,13 +213,6 @@ export const AgentPerformance = () => {
                   </div>
                   <p className="text-2xl font-display font-semibold">{agent.stats.inquiriesThisMonth}</p>
                   <p className="text-xs text-muted-foreground">Inquiries Handled</p>
-                </div>
-                <div className="bg-muted/30 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <Clock className="w-4 h-4 text-success" />
-                  </div>
-                  <p className="text-2xl font-display font-semibold">{agent.stats.avgResponseTime}</p>
-                  <p className="text-xs text-muted-foreground">Avg. Response Time</p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-1">
