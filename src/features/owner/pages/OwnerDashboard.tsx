@@ -12,10 +12,26 @@ import {
   Viewing,
   Contract,
 } from "@/components/dashboard";
-import { OwnerSidebar, OwnerSettings, RentTracker, DocumentVault, MaintenanceView, AgentPerformance } from "../components";
+import { OwnerSidebar, OwnerSettings, RentTracker, DocumentVault, MaintenanceView, AgentPerformance, OwnerPropertyDetailsModal } from "../components";
 
-// Dummy data for owner
-const ownerProperties: Property[] = [
+// Extended property type
+interface OwnerProperty extends Property {
+  tenant?: {
+    name: string;
+    email: string;
+    phone: string;
+    moveInDate?: string;
+    leaseEnd?: string;
+  };
+  history?: {
+    date: string;
+    action: string;
+    details: string;
+  }[];
+}
+
+// Dummy data for owner with agent and history info
+const ownerProperties: OwnerProperty[] = [
   {
     id: "prop-001",
     title: "Marina Heights Tower",
@@ -32,8 +48,14 @@ const ownerProperties: Property[] = [
     status: "available",
     images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"],
     owner: { name: "You", email: "", phone: "" },
+    agent: { name: "Ahmed Khan", email: "ahmed.khan@dar360.ae", phone: "+971501234567", company: "Dar360 Real Estate", rating: 4.8 },
     viewingsCount: 8,
     createdAt: "2024-12-15",
+    history: [
+      { date: "Dec 28, 2024", action: "Viewing completed", details: "Anna Williams showed interest" },
+      { date: "Dec 25, 2024", action: "Viewing scheduled", details: "Anna Williams requested viewing" },
+      { date: "Dec 15, 2024", action: "Listed for rent", details: "Property listed at AED 120,000/year" },
+    ],
   },
   {
     id: "prop-002",
@@ -51,8 +73,21 @@ const ownerProperties: Property[] = [
     status: "reserved",
     images: ["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800"],
     owner: { name: "You", email: "", phone: "" },
+    agent: { name: "Sara Mohammed", email: "sara.m@dar360.ae", phone: "+971559876543", company: "Dar360 Real Estate", rating: 4.6 },
     viewingsCount: 12,
     createdAt: "2024-12-10",
+    tenant: {
+      name: "Lisa Anderson",
+      email: "lisa@email.com",
+      phone: "+971557890123",
+      moveInDate: "2025-01-15",
+      leaseEnd: "2026-01-14",
+    },
+    history: [
+      { date: "Dec 28, 2024", action: "Contract pending", details: "Awaiting Lisa Anderson's signature" },
+      { date: "Dec 26, 2024", action: "Application approved", details: "You approved Lisa Anderson" },
+      { date: "Dec 22, 2024", action: "Application received", details: "Lisa Anderson applied" },
+    ],
   },
 ];
 
@@ -114,7 +149,8 @@ type Tab = "overview" | "properties" | "viewings" | "agents" | "rent" | "mainten
 
 export const OwnerDashboard = () => {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
-
+  const [selectedProperty, setSelectedProperty] = useState<OwnerProperty | null>(null);
+  const [showPropertyDetails, setShowPropertyDetails] = useState(false);
   const stats = {
     totalProperties: ownerProperties.length,
     totalViewings: ownerViewings.length,
@@ -185,7 +221,9 @@ export const OwnerDashboard = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-5">
                   {ownerProperties.map((property) => (
-                    <PropertyCard key={property.id} property={property} variant="owner" />
+                    <div key={property.id} onClick={() => { setSelectedProperty(property); setShowPropertyDetails(true); }} className="cursor-pointer">
+                      <PropertyCard property={property} variant="owner" />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -198,7 +236,9 @@ export const OwnerDashboard = () => {
               <h1 className="font-display text-2xl font-semibold">My Properties</h1>
               <div className="grid md:grid-cols-2 gap-5">
                 {ownerProperties.map((property) => (
-                  <PropertyCard key={property.id} property={property} variant="owner" />
+                  <div key={property.id} onClick={() => { setSelectedProperty(property); setShowPropertyDetails(true); }} className="cursor-pointer">
+                    <PropertyCard property={property} variant="owner" />
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -271,6 +311,12 @@ export const OwnerDashboard = () => {
           {activeTab === "settings" && <OwnerSettings />}
         </div>
       </main>
+
+      <OwnerPropertyDetailsModal 
+        property={selectedProperty} 
+        open={showPropertyDetails} 
+        onClose={() => { setShowPropertyDetails(false); setSelectedProperty(null); }} 
+      />
     </div>
   );
 };

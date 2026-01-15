@@ -32,15 +32,16 @@ import {
   AnalyticsDashboard,
   EditPropertyModal,
   AgentMaintenanceRequests,
+  AgentPropertyDetailsModal,
 } from "../components";
-import { dummyProperties, dummyViewings, dummyContracts } from "../data/dummyData";
+import { dummyProperties, dummyViewings, dummyContracts, AgentPropertyWithDetails } from "../data/dummyData";
 import { toast } from "sonner";
 
 type Tab = "overview" | "properties" | "viewings" | "contracts" | "maintenance" | "commissions" | "analytics" | "settings";
 
 export const AgentDashboard = () => {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
-  const [properties, setProperties] = useState<Property[]>(dummyProperties);
+  const [properties, setProperties] = useState<AgentPropertyWithDetails[]>(dummyProperties);
   const [viewings, setViewings] = useState<Viewing[]>(dummyViewings);
   const [contracts, setContracts] = useState<Contract[]>(dummyContracts);
 
@@ -48,7 +49,8 @@ export const AgentDashboard = () => {
   const [showScheduleViewing, setShowScheduleViewing] = useState(false);
   const [showCreateContract, setShowCreateContract] = useState(false);
   const [showEditProperty, setShowEditProperty] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [showPropertyDetails, setShowPropertyDetails] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState<AgentPropertyWithDetails | null>(null);
   const [propertyFilter, setPropertyFilter] = useState<"all" | "available" | "reserved" | "rented">("all");
 
   const stats = {
@@ -82,6 +84,14 @@ export const AgentDashboard = () => {
     if (property) {
       setSelectedProperty(property);
       setShowEditProperty(true);
+    }
+  };
+
+  const handleViewProperty = (id: string) => {
+    const property = properties.find((p) => p.id === id);
+    if (property) {
+      setSelectedProperty(property);
+      setShowPropertyDetails(true);
     }
   };
 
@@ -197,6 +207,7 @@ export const AgentDashboard = () => {
                   <PropertyCard
                     key={property.id}
                     property={property}
+                    onView={handleViewProperty}
                     onShare={handleShareProperty}
                     onEdit={handleEditProperty}
                     onScheduleViewing={() => setShowScheduleViewing(true)}
@@ -313,6 +324,14 @@ export const AgentDashboard = () => {
           onDelete={handleDeleteProperty}
         />
       )}
+      <AgentPropertyDetailsModal
+        property={selectedProperty}
+        open={showPropertyDetails}
+        onClose={() => { setShowPropertyDetails(false); setSelectedProperty(null); }}
+        onEdit={handleEditProperty}
+        onShare={handleShareProperty}
+        onScheduleViewing={() => setShowScheduleViewing(true)}
+      />
     </div>
   );
 };
