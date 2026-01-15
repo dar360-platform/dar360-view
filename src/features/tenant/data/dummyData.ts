@@ -1,7 +1,16 @@
 import { Property, Viewing, Contract } from "@/components/dashboard";
 
+// Extended property type with history
+export interface PropertyWithHistory extends Property {
+  history?: {
+    date: string;
+    action: string;
+    details: string;
+  }[];
+}
+
 // Available properties for tenant to browse
-export const availableProperties: Property[] = [
+export const availableProperties: PropertyWithHistory[] = [
   {
     id: "prop-001",
     title: "Marina Heights Tower",
@@ -21,6 +30,11 @@ export const availableProperties: Property[] = [
     agent: { name: "Ahmed Khan", email: "ahmed.khan@dar360.ae", phone: "+971501234567", company: "Dar360 Real Estate", rating: 4.8 },
     viewingsCount: 8,
     createdAt: "2024-12-15",
+    history: [
+      { date: "Dec 15, 2024", action: "Listed for rent", details: "Property listed at AED 120,000/year" },
+      { date: "Dec 10, 2024", action: "Renovation completed", details: "Kitchen and bathrooms renovated" },
+      { date: "Nov 1, 2024", action: "Previous lease ended", details: "Previous tenant moved out" },
+    ],
   },
   {
     id: "prop-002",
@@ -41,6 +55,11 @@ export const availableProperties: Property[] = [
     agent: { name: "Sara Mohammed", email: "sara.m@dar360.ae", phone: "+971559876543", company: "Dar360 Real Estate", rating: 4.6 },
     viewingsCount: 12,
     createdAt: "2024-12-10",
+    history: [
+      { date: "Dec 10, 2024", action: "Listed for rent", details: "Property listed at AED 280,000/year" },
+      { date: "Dec 5, 2024", action: "Price reduced", details: "Price reduced from AED 300,000 to AED 280,000" },
+      { date: "Nov 20, 2024", action: "Professional photos", details: "Property photographed for listing" },
+    ],
   },
   {
     id: "prop-003",
@@ -61,6 +80,10 @@ export const availableProperties: Property[] = [
     agent: { name: "Ahmed Khan", email: "ahmed.khan@dar360.ae", phone: "+971501234567", company: "Dar360 Real Estate", rating: 4.8 },
     viewingsCount: 3,
     createdAt: "2024-12-20",
+    history: [
+      { date: "Dec 20, 2024", action: "Listed for rent", details: "Luxury villa listed at AED 750,000/year" },
+      { date: "Dec 18, 2024", action: "Pool maintenance", details: "Annual pool and garden maintenance completed" },
+    ],
   },
   {
     id: "prop-005",
@@ -81,6 +104,10 @@ export const availableProperties: Property[] = [
     agent: { name: "Fatima Al Zahra", email: "fatima@dar360.ae", phone: "+971507778888", company: "Dar360 Real Estate", rating: 4.9 },
     viewingsCount: 6,
     createdAt: "2024-12-18",
+    history: [
+      { date: "Dec 18, 2024", action: "Listed for rent", details: "Property listed at AED 75,000/year" },
+      { date: "Dec 15, 2024", action: "Deep cleaning", details: "Professional cleaning completed" },
+    ],
   },
   {
     id: "prop-006",
@@ -101,6 +128,10 @@ export const availableProperties: Property[] = [
     agent: { name: "Sara Mohammed", email: "sara.m@dar360.ae", phone: "+971559876543", company: "Dar360 Real Estate", rating: 4.6 },
     viewingsCount: 10,
     createdAt: "2024-12-22",
+    history: [
+      { date: "Dec 22, 2024", action: "Listed for rent", details: "Studio listed at AED 55,000/year" },
+      { date: "Dec 20, 2024", action: "New appliances", details: "New AC and kitchen appliances installed" },
+    ],
   },
 ];
 

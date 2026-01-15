@@ -1,7 +1,24 @@
 import { Property, Viewing, Contract } from "@/components/dashboard";
 
+// Extended property type with tenant and history
+export interface AgentPropertyWithDetails extends Property {
+  tenant?: {
+    name: string;
+    email: string;
+    phone: string;
+    moveInDate?: string;
+    leaseEnd?: string;
+  };
+  history?: {
+    date: string;
+    action: string;
+    details: string;
+    actor?: string;
+  }[];
+}
+
 // Dummy properties data
-export const dummyProperties: Property[] = [
+export const dummyProperties: AgentPropertyWithDetails[] = [
   {
     id: "prop-001",
     title: "Marina Heights Tower",
@@ -20,6 +37,12 @@ export const dummyProperties: Property[] = [
     owner: { name: "Ahmed Al Maktoum", email: "ahmed@email.com", phone: "+971501234567" },
     viewingsCount: 8,
     createdAt: "2024-12-15",
+    history: [
+      { date: "Dec 28, 2024", action: "Viewing completed", details: "Anna Williams - Interested", actor: "Agent" },
+      { date: "Dec 25, 2024", action: "Viewing scheduled", details: "Anna Williams requested viewing", actor: "System" },
+      { date: "Dec 15, 2024", action: "Listed for rent", details: "Property listed at AED 120,000/year", actor: "Agent" },
+      { date: "Dec 10, 2024", action: "Property added", details: "Owner Ahmed Al Maktoum added property", actor: "Agent" },
+    ],
   },
   {
     id: "prop-002",
@@ -39,6 +62,19 @@ export const dummyProperties: Property[] = [
     owner: { name: "Sara Hassan", email: "sara@email.com", phone: "+971502345678" },
     viewingsCount: 12,
     createdAt: "2024-12-10",
+    tenant: {
+      name: "Lisa Anderson",
+      email: "lisa@email.com",
+      phone: "+971557890123",
+      moveInDate: "2025-01-15",
+      leaseEnd: "2026-01-14",
+    },
+    history: [
+      { date: "Dec 28, 2024", action: "Contract sent", details: "Awaiting tenant signature", actor: "Agent" },
+      { date: "Dec 26, 2024", action: "Application approved", details: "Lisa Anderson approved by owner", actor: "Owner" },
+      { date: "Dec 22, 2024", action: "Application received", details: "Lisa Anderson applied for property", actor: "System" },
+      { date: "Dec 10, 2024", action: "Listed for rent", details: "Property listed at AED 280,000/year", actor: "Agent" },
+    ],
   },
   {
     id: "prop-003",
@@ -58,6 +94,10 @@ export const dummyProperties: Property[] = [
     owner: { name: "Khalid Omar", email: "khalid@email.com", phone: "+971503456789" },
     viewingsCount: 3,
     createdAt: "2024-12-20",
+    history: [
+      { date: "Dec 23, 2024", action: "Viewing scheduled", details: "Michael Brown - Family of 6", actor: "System" },
+      { date: "Dec 20, 2024", action: "Listed for rent", details: "Luxury villa listed at AED 750,000/year", actor: "Agent" },
+    ],
   },
   {
     id: "prop-004",
@@ -77,6 +117,19 @@ export const dummyProperties: Property[] = [
     owner: { name: "Fatima Al Ali", email: "fatima@email.com", phone: "+971504567890" },
     viewingsCount: 15,
     createdAt: "2024-11-28",
+    tenant: {
+      name: "James Wilson",
+      email: "james@email.com",
+      phone: "+971556789012",
+      moveInDate: "2024-12-01",
+      leaseEnd: "2025-11-30",
+    },
+    history: [
+      { date: "Dec 1, 2024", action: "Tenant moved in", details: "James Wilson moved in", actor: "System" },
+      { date: "Nov 28, 2024", action: "Contract signed", details: "All parties signed the contract", actor: "System" },
+      { date: "Nov 25, 2024", action: "Contract created", details: "1-year lease at AED 65,000/year", actor: "Agent" },
+      { date: "Nov 20, 2024", action: "Application approved", details: "James Wilson approved by owner", actor: "Owner" },
+    ],
   },
 ];
 

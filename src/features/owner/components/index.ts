@@ -4,3 +4,4 @@ export { RentTracker } from "./RentTracker";
 export { DocumentVault } from "./DocumentVault";
 export { MaintenanceView } from "./MaintenanceView";
 export { AgentPerformance } from "./AgentPerformance";
+export { OwnerPropertyDetailsModal } from "./OwnerPropertyDetailsModal";
