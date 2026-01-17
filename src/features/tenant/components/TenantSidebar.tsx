@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
-  Search,
   Calendar,
   FileText,
   Heart,
@@ -19,7 +18,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
-type Tab = "overview" | "browse" | "saved" | "viewings" | "applications" | "contracts" | "maintenance" | "payments" | "settings";
+type Tab = "overview" | "saved" | "viewings" | "applications" | "contracts" | "maintenance" | "payments" | "settings";
 
 interface TenantSidebarProps {
   activeTab: Tab;
@@ -28,7 +27,6 @@ interface TenantSidebarProps {
 
 const navItems: { id: Tab; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "browse", label: "Browse Properties", icon: Search },
   { id: "saved", label: "Saved", icon: Heart },
   { id: "viewings", label: "My Viewings", icon: Calendar },
   { id: "applications", label: "Applications", icon: ClipboardList },
