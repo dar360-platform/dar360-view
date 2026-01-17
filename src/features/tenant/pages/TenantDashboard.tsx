@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Search,
@@ -6,15 +7,11 @@ import {
   FileText,
   Heart,
   Building2,
-  SlidersHorizontal,
   ClipboardList,
-  MapPin,
   Wrench,
   CreditCard,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   StatsCard,
   TenantPropertyCard,
@@ -44,9 +41,10 @@ import {
 } from "../data/dummyData";
 import { toast } from "sonner";
 
-type Tab = "overview" | "browse" | "saved" | "viewings" | "applications" | "contracts" | "maintenance" | "payments" | "settings";
+type Tab = "overview" | "saved" | "viewings" | "applications" | "contracts" | "maintenance" | "payments" | "settings";
 
 export const TenantDashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<Tab>("overview");
   const [properties] = useState<Property[]>(availableProperties);
   const [viewings, setViewings] = useState<Viewing[]>(tenantViewings);
@@ -171,15 +169,7 @@ export const TenantDashboard = () => {
               </div>
 
               {/* Quick Actions */}
-              <div className="grid md:grid-cols-3 gap-4">
-                <div
-                  className="bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20 rounded-xl p-5 cursor-pointer hover:border-accent/40 transition-colors"
-                  onClick={() => setActiveTab("browse")}
-                >
-                  <Search className="w-8 h-8 text-accent mb-3" />
-                  <h3 className="font-display font-semibold text-lg">Browse Properties</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Discover {properties.length} available properties</p>
-                </div>
+              <div className="grid md:grid-cols-2 gap-4">
                 <div
                   className="bg-card border border-border/50 rounded-xl p-5 cursor-pointer hover:border-accent/40 transition-colors"
                   onClick={() => setActiveTab("maintenance")}
@@ -254,74 +244,6 @@ export const TenantDashboard = () => {
             </motion.div>
           )}
 
-          {/* Browse Tab */}
-          {activeTab === "browse" && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-              <div>
-                <h1 className="font-display text-2xl font-semibold">Browse Properties</h1>
-                <p className="text-muted-foreground">Find your next home</p>
-              </div>
-
-              {/* Search & Filters */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search by building or area..."
-                    className="pl-10"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
-                <Select value={areaFilter} onValueChange={setAreaFilter}>
-                  <SelectTrigger className="w-full sm:w-40">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <SelectValue placeholder="Area" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Areas</SelectItem>
-                    {areas.map((area) => (
-                      <SelectItem key={area} value={area}>
-                        {area}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Select value={bedsFilter} onValueChange={setBedsFilter}>
-                  <SelectTrigger className="w-full sm:w-40">
-                    <SlidersHorizontal className="w-4 h-4 mr-2" />
-                    <SelectValue placeholder="Beds" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="studio">Studio</SelectItem>
-                    <SelectItem value="1">1 Bed</SelectItem>
-                    <SelectItem value="2">2 Beds</SelectItem>
-                    <SelectItem value="3+">3+ Beds</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <p className="text-sm text-muted-foreground">{filteredProperties.length} properties found</p>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filteredProperties.map((property) => (
-                  <TenantPropertyCard
-                    key={property.id}
-                    property={property}
-                    onView={handleViewProperty}
-                    onSave={handleSaveProperty}
-                    isSaved={savedProperties.includes(property.id)}
-                  />
-                ))}
-              </div>
-
-              {filteredProperties.length === 0 && (
-                <EmptyState icon={Building2} title="No properties found" description="Try adjusting your search or filters" />
-              )}
-            </motion.div>
-          )}
-
           {/* Saved Tab */}
           {activeTab === "saved" && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
@@ -344,7 +266,7 @@ export const TenantDashboard = () => {
                   icon={Heart}
                   title="No saved properties"
                   description="Save properties while browsing to view them here"
-                  action={{ label: "Browse Properties", onClick: () => setActiveTab("browse") }}
+                  action={{ label: "Browse Properties", onClick: () => navigate("/") }}
                 />
               )}
             </motion.div>
@@ -366,7 +288,7 @@ export const TenantDashboard = () => {
                         icon={Calendar}
                         title="No upcoming viewings"
                         description="Request a viewing from a property you like"
-                        action={{ label: "Browse Properties", onClick: () => setActiveTab("browse") }}
+                        action={{ label: "Browse Properties", onClick: () => navigate("/") }}
                       />
                     )}
                   </div>
@@ -416,7 +338,7 @@ export const TenantDashboard = () => {
                   icon={ClipboardList}
                   title="No applications yet"
                   description="Apply for properties after scheduling viewings"
-                  action={{ label: "Browse Properties", onClick: () => setActiveTab("browse") }}
+                  action={{ label: "Browse Properties", onClick: () => navigate("/") }}
                 />
               )}
             </motion.div>

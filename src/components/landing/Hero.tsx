@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import agentScreen from "@/assets/agent_screen.png";
 
 export const Hero = () => {
+  const navigate = useNavigate();
+  
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -55,7 +58,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="mb-6"
+              className="flex flex-wrap gap-3 mb-6"
             >
               <Button
                 variant="gold"
@@ -65,6 +68,15 @@ export const Hero = () => {
               >
                 Start Free Trial
                 <ArrowRight className="w-5 h-5" />
+              </Button>
+              <Button
+                variant="outline"
+                size="xl"
+                onClick={() => navigate("/tenant/dashboard")}
+                className="rounded-xl border-cream/30 text-cream hover:bg-cream/10 hover:text-cream"
+              >
+                <Search className="w-5 h-5" />
+                Browse Properties
               </Button>
             </motion.div>
 
