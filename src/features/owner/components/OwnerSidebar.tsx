@@ -115,8 +115,8 @@ export const OwnerSidebar = ({ activeTab, onTabChange }: OwnerSidebarProps) => {
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-64 border-r border-border/50 bg-card">
+      {/* Desktop Sidebar - Fixed position, doesn't scroll with content */}
+      <aside className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:left-0 w-64 border-r border-border/50 bg-card z-30">
         <NavContent activeTab={activeTab} onTabChange={onTabChange} />
       </aside>
 
