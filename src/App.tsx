@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AuthPage from "./pages/AuthPage";
+import BrowseProperties from "./pages/BrowseProperties";
 
 // Feature Pages
 import { AgentAuth } from "./features/agent/pages/AgentAuth";
@@ -30,6 +31,9 @@ const App = () => (
         <Routes>
           {/* Landing */}
           <Route path="/" element={<Index />} />
+          
+          {/* Browse Properties (Public) */}
+          <Route path="/properties" element={<BrowseProperties />} />
           
           {/* Role Selection */}
           <Route path="/auth" element={<AuthPage />} />
