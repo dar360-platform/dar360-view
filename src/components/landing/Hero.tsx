@@ -72,8 +72,8 @@ export const Hero = () => {
               <Button
                 variant="outline"
                 size="xl"
-                onClick={() => navigate("/tenant/dashboard")}
-                className="rounded-xl border-cream/30 text-cream hover:bg-cream/10 hover:text-cream"
+                onClick={() => navigate("/properties")}
+                className="rounded-xl border-accent/50 bg-transparent text-accent hover:bg-accent/10 hover:text-accent"
               >
                 <Search className="w-5 h-5" />
                 Browse Properties
