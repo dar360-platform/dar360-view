@@ -9,6 +9,7 @@ export const TenantAuth = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const mode = searchParams.get("mode") === "signup" ? "signup" : "signin";
+  const returnTo = searchParams.get("returnTo") ?? "/auth";
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
@@ -27,7 +28,16 @@ export const TenantAuth = () => {
   };
 
   const handleModeSwitch = () => {
-    navigate(mode === "signup" ? "/tenant/auth" : "/tenant/auth?mode=signup");
+    const params = new URLSearchParams();
+    const nextMode = mode === "signup" ? "signin" : "signup";
+
+    if (nextMode === "signup") params.set("mode", "signup");
+
+    const returnToParam = searchParams.get("returnTo");
+    if (returnToParam) params.set("returnTo", returnToParam);
+
+    const qs = params.toString();
+    navigate(`/tenant/auth${qs ? `?${qs}` : ""}`);
   };
 
   return (
@@ -38,7 +48,7 @@ export const TenantAuth = () => {
           ? "Find your perfect home and manage your rental journey"
           : "Sign in to view your rental applications"
       }
-      backTo="/properties"
+      backTo={returnTo}
     >
       <AuthForm
         role="tenant"

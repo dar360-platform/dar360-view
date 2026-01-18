@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Briefcase, Building2, User } from "lucide-react";
 import { RoleCard } from "@/components/molecules/RoleCard";
@@ -52,6 +52,8 @@ const itemVariants = {
 
 export const RoleSelector = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = encodeURIComponent(location.pathname + location.search);
 
   return (
     <div className="w-full max-w-3xl mx-auto">
@@ -77,7 +79,10 @@ export const RoleSelector = () => {
               description={role.description}
               icon={role.icon}
               color={role.color}
-              onClick={() => navigate(role.path)}
+              onClick={() => {
+                const to = role.id === "tenant" ? `${role.path}?returnTo=${returnTo}` : role.path;
+                navigate(to);
+              }}
             />
           </motion.div>
         ))}
