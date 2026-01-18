@@ -9,14 +9,23 @@ export const AgentAuth = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const mode = searchParams.get("mode") === "signup" ? "signup" : "signin";
+  const returnTo = searchParams.get("returnTo") ?? "/auth";
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
-    // Dummy auth - navigate to dashboard
     setTimeout(() => {
       setIsLoading(false);
-      toast.success(mode === "signup" ? "Account created!" : "Welcome back!");
-      navigate("/agent/dashboard");
+      if (mode === "signup") {
+        toast.success("Account created! Please sign in to continue.", {
+          description: "Redirecting to sign in page...",
+        });
+        const returnToParam = searchParams.get("returnTo");
+        const qs = returnToParam ? `?returnTo=${returnToParam}` : "";
+        navigate(`/agent/auth${qs}`);
+      } else {
+        toast.success("Welcome back!");
+        navigate("/agent/dashboard");
+      }
     }, 800);
   };
 
@@ -27,7 +36,16 @@ export const AgentAuth = () => {
   };
 
   const handleModeSwitch = () => {
-    navigate(mode === "signup" ? "/agent/auth" : "/agent/auth?mode=signup");
+    const params = new URLSearchParams();
+    const nextMode = mode === "signup" ? "signin" : "signup";
+
+    if (nextMode === "signup") params.set("mode", "signup");
+
+    const returnToParam = searchParams.get("returnTo");
+    if (returnToParam) params.set("returnTo", returnToParam);
+
+    const qs = params.toString();
+    navigate(`/agent/auth${qs ? `?${qs}` : ""}`);
   };
 
   return (
@@ -38,6 +56,7 @@ export const AgentAuth = () => {
           ? "Join Dar360 and start managing properties efficiently"
           : "Sign in to manage your properties and contracts"
       }
+      backTo={returnTo}
     >
       <AuthForm
         role="agent"

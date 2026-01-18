@@ -9,14 +9,23 @@ export const OwnerAuth = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const mode = searchParams.get("mode") === "signup" ? "signup" : "signin";
+  const returnTo = searchParams.get("returnTo") ?? "/auth";
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
-    // Dummy auth - navigate to dashboard
     setTimeout(() => {
       setIsLoading(false);
-      toast.success(mode === "signup" ? "Account created!" : "Welcome back!");
-      navigate("/owner/dashboard");
+      if (mode === "signup") {
+        toast.success("Account created! Please sign in to continue.", {
+          description: "Redirecting to sign in page...",
+        });
+        const returnToParam = searchParams.get("returnTo");
+        const qs = returnToParam ? `?returnTo=${returnToParam}` : "";
+        navigate(`/owner/auth${qs}`);
+      } else {
+        toast.success("Welcome back!");
+        navigate("/owner/dashboard");
+      }
     }, 800);
   };
 
@@ -27,7 +36,16 @@ export const OwnerAuth = () => {
   };
 
   const handleModeSwitch = () => {
-    navigate(mode === "signup" ? "/owner/auth" : "/owner/auth?mode=signup");
+    const params = new URLSearchParams();
+    const nextMode = mode === "signup" ? "signin" : "signup";
+
+    if (nextMode === "signup") params.set("mode", "signup");
+
+    const returnToParam = searchParams.get("returnTo");
+    if (returnToParam) params.set("returnTo", returnToParam);
+
+    const qs = params.toString();
+    navigate(`/owner/auth${qs ? `?${qs}` : ""}`);
   };
 
   return (
@@ -38,6 +56,7 @@ export const OwnerAuth = () => {
           ? "Track your property's performance in real-time"
           : "Sign in to view your property activity"
       }
+      backTo={returnTo}
     >
       <AuthForm
         role="owner"
