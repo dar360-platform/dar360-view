@@ -53,10 +53,29 @@ export const api = {
         method: 'POST',
         body: JSON.stringify(data),
       }),
-    register: (data: { email: string; password: string; role: string }) =>
+    register: (data: any) =>
       fetchAPI('/auth/register', {
         method: 'POST',
         body: JSON.stringify(data),
+      }),
+    me: () => fetchAPI('/auth/me'),
+    updateMe: (data: any) =>
+      fetchAPI('/auth/me', {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+      }),
+    changePassword: (data: {
+      currentPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+    }) =>
+      fetchAPI('/auth/change-password', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      }),
+    logout: () =>
+      fetchAPI('/auth/logout', {
+        method: 'POST',
       }),
     forgotPassword: (email: string) =>
       fetchAPI('/auth/forgot-password', {
