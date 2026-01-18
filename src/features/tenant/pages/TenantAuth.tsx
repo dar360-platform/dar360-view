@@ -13,11 +13,20 @@ export const TenantAuth = () => {
 
   const handleSubmit = (data: AuthFormData) => {
     setIsLoading(true);
-    // Dummy auth - navigate to dashboard
     setTimeout(() => {
       setIsLoading(false);
-      toast.success(mode === "signup" ? "Account created!" : "Welcome back!");
-      navigate("/tenant/dashboard");
+      if (mode === "signup") {
+        toast.success("Account created! Please sign in to continue.", {
+          description: "Redirecting to sign in page...",
+        });
+        // Redirect to sign in page, preserving returnTo
+        const returnToParam = searchParams.get("returnTo");
+        const qs = returnToParam ? `?returnTo=${returnToParam}` : "";
+        navigate(`/tenant/auth${qs}`);
+      } else {
+        toast.success("Welcome back!");
+        navigate("/tenant/dashboard");
+      }
     }, 800);
   };
 
