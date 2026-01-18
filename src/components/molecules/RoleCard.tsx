@@ -36,7 +36,7 @@ export const RoleCard = ({
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "w-full p-6 rounded-2xl border-2 bg-card text-left transition-all duration-200",
+        "w-full h-full p-6 rounded-2xl border-2 bg-card text-left transition-all duration-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
         colorStyles[color]
       )}
