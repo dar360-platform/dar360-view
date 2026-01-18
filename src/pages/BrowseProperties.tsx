@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Dummy properties data
 const properties = [
@@ -86,6 +86,11 @@ const properties = [
 
 const BrowseProperties = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = encodeURIComponent(location.pathname + location.search);
+
+  const goTenantAuth = () => navigate(`/tenant/auth?returnTo=${returnTo}`);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("all");
   const [bedroomFilter, setBedroomFilter] = useState("all");
@@ -125,7 +130,7 @@ const BrowseProperties = () => {
                 <p className="text-sm text-muted-foreground">{filteredProperties.length} properties available</p>
               </div>
             </div>
-            <Button onClick={() => navigate("/tenant/auth")} className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button onClick={goTenantAuth} className="bg-primary text-primary-foreground hover:bg-primary/90">
               Sign In to Apply
             </Button>
           </div>
@@ -245,7 +250,7 @@ const BrowseProperties = () => {
                       <Button 
                         size="sm" 
                         variant="outline"
-                        onClick={() => navigate("/tenant/auth")}
+                        onClick={goTenantAuth}
                       >
                         <Eye className="w-4 h-4 mr-1" />
                         View
