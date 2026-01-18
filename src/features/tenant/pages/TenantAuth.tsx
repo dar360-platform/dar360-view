@@ -38,6 +38,7 @@ export const TenantAuth = () => {
           ? "Find your perfect home and manage your rental journey"
           : "Sign in to view your rental applications"
       }
+      backTo="/properties"
     >
       <AuthForm
         role="tenant"
